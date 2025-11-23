@@ -16,5 +16,5 @@
 
 联系方式 : +86 18627858631
 
-Email : carto@hubu.edu.cn
+Email: carto@hubu.edu.cn
 

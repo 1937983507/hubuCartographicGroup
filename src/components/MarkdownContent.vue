@@ -46,9 +46,18 @@ onMounted(async () => {
     line-height: 1.8;
   }
 
+  :deep(p) {
+    margin-bottom: 8px;
+    line-height: 1.8;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
   :deep(a) {
     color: #409eff;
     text-decoration: none;
+    display: inline;
+    white-space: nowrap;
 
     &:hover {
       text-decoration: underline;
@@ -76,23 +85,6 @@ onMounted(async () => {
     margin: 20px 0;
     border: none;
     border-bottom: 1px solid rgb(224, 224, 224);
-  }
-
-  :deep(a) {
-    color: #409eff;
-    text-decoration: none;
-    font-size: 16px;
-    display: block;
-    margin-bottom: 8px;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  :deep(p) {
-    margin-bottom: 8px;
-    line-height: 1.8;
   }
 }
 </style>

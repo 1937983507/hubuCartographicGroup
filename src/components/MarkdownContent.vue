@@ -41,23 +41,27 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .markdown-content {
-  :deep(p) {
-    margin-bottom: 8px;
-    line-height: 1.8;
-  }
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   :deep(p) {
     margin-bottom: 8px;
     line-height: 1.8;
     white-space: normal;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   :deep(a) {
     color: #409eff;
     text-decoration: none;
     display: inline;
-    white-space: nowrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 
     &:hover {
       text-decoration: underline;
@@ -79,6 +83,22 @@ onMounted(async () => {
     margin: 20px 0 10px 0;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(224, 224, 224);
+  }
+
+  // 论文链接样式 - 段落中的链接
+  :deep(p > a) {
+    color: #409eff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 8px;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #66b1ff;
+      text-decoration: underline;
+    }
   }
 
   :deep(hr) {

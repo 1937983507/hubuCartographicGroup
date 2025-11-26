@@ -62,6 +62,7 @@ onMounted(async () => {
     word-break: break-word;
     overflow-wrap: break-word;
     max-width: 100%;
+    font-size: 13px;
 
     &:hover {
       text-decoration: underline;
@@ -89,7 +90,7 @@ onMounted(async () => {
   :deep(p > a) {
     color: #409eff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     display: inline-block;
     margin-bottom: 8px;

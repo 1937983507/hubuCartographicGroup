@@ -219,7 +219,7 @@ const scrollToTop = () => {
   display: flex;
   max-width: 1400px;
   margin: 85px auto 20px;
-  margin-top: 155px; /* 为固定的header留出空间 */
+  margin-top: 110px; /* 为固定的header留出空间 */
   gap: 20px;
   padding: 0 5%;
   position: relative;
@@ -229,8 +229,8 @@ const scrollToTop = () => {
   width: 300px;
   flex-shrink: 0;
   position: fixed;
-  left: max(5%, calc((100% - 1400px) / 2 + 5%));
-  top: 155px; /* 调整位置以适应固定的header */
+  left: max(5%, calc((100% - 1500px) / 2 + 5%));
+  top: 110px; /* 调整位置以适应固定的header */
   height: fit-content;
   max-height: calc(100vh - 175px);
   overflow-y: auto;
@@ -246,7 +246,7 @@ const scrollToTop = () => {
     align-items: center;
 
     img {
-      width: 50%;
+      width: 40%;
       margin-bottom: 10px;
     }
 
@@ -299,7 +299,7 @@ const scrollToTop = () => {
   background: transparent;
   padding: 0px 30px;
   position: relative;
-  margin-left: 320px; /* 为左侧固定栏留出空间 */
+  margin-left: 270px; /* 为左侧固定栏留出空间 */
 }
 
 .back-top {

@@ -51,7 +51,25 @@
 
       <!-- 摘要 -->
       <div v-if="paper.abstract" class="abstract-section">
-        <span class="abstract-label">摘要:</span><span class="abstract-text">{{ paper.abstract }}</span>
+        <span class="abstract-label">摘要:</span>
+        <div class="abstract-body">
+          <div
+            :class="['abstract-text-wrapper', { 'is-expanded': isAbstractExpanded(index) }]"
+          >
+            <span
+              :class="['abstract-text', { 'is-expanded': isAbstractExpanded(index) }]"
+            >
+              {{ paper.abstract }}
+            </span>
+            <button
+              type="button"
+              :class="['abstract-toggle', { 'is-expanded': isAbstractExpanded(index) }]"
+              @click="toggleAbstract(index)"
+            >
+              {{ isAbstractExpanded(index) ? '还原' : '更多' }}
+            </button>
+          </div>
+        </div>
       </div>
       <!-- 关键词 -->
       <div v-if="paper.keywords" class="keywords-section">
@@ -94,6 +112,7 @@ const props = defineProps({
 
 const papers = ref([])
 const loading = ref(true)
+const expandedAbstracts = ref({})
 
 const emit = defineEmits(['papers-loaded'])
 
@@ -183,6 +202,14 @@ const formatDate = (paper) => {
     return `${paper.year}年`
   }
   return `${paper.year}年`
+}
+
+const isAbstractExpanded = (index) => {
+  return !!expandedAbstracts.value[index]
+}
+
+const toggleAbstract = (index) => {
+  expandedAbstracts.value[index] = !expandedAbstracts.value[index]
 }
 
 // 解析YAML格式的论文数据
@@ -442,12 +469,25 @@ onMounted(async () => {
       color: #555;
       display: flex;
       align-items: flex-start;
+      gap: 8px;
       .abstract-label {
         font-weight: 600;
         color: #333;
         margin-right: 4px;
         white-space: nowrap;
         flex-shrink: 0;
+      }
+      .abstract-body {
+        flex: 1;
+      }
+      .abstract-text-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+      .abstract-text-wrapper.is-expanded {
+        display: inline;
+        width: auto;
       }
       .abstract-text {
         color: #555;
@@ -460,7 +500,33 @@ onMounted(async () => {
         word-break: break-all;
         overflow-wrap: anywhere;
         white-space: normal;
-        flex: 1;
+        &.is-expanded {
+          display: block;
+          -webkit-line-clamp: unset;
+          line-clamp: unset;
+          overflow: visible;
+        }
+      }
+      .abstract-toggle {
+        border: none;
+        background: none;
+        color: #409eff;
+        cursor: pointer;
+        font-size: 13px;
+        padding: 0;
+        line-height: 1.6;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding-left: 4px;
+        &:hover {
+          text-decoration: underline;
+        }
+        &.is-expanded {
+          position: static;
+          margin-left: 4px;
+          padding-left: 0;
+        }
       }
     }
 

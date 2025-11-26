@@ -59,6 +59,7 @@ import { ArrowUp } from '@element-plus/icons-vue'
 import MarkdownContent from '../components/MarkdownContent.vue'
 import HomePage from '../components/pages/HomePage.vue'
 import ProjectsPage from '../components/pages/ProjectsPage.vue'
+import TeamAchievementsPage from '../components/pages/TeamAchievementsPage.vue'
 import PapersPage from '../components/pages/PapersPage.vue'
 import SoftwritingPatentPage from '../components/pages/SoftwritingPatentPage.vue'
 import HonourPage from '../components/pages/HonourPage.vue'
@@ -75,6 +76,7 @@ const menuItems = [
   { id: 'papers', name: '学术论文' },
   { id: 'softwriting&patent', name: '软著专利' },
   { id: 'honour', name: '获奖荣誉' },
+  { id: 'teamAchievements', name: '团队成果' },
   { id: 'cooperationTeam', name: '合作团队' },
   { id: 'studentTeam', name: '学生团队' }
 ]
@@ -82,6 +84,7 @@ const menuItems = [
 const pageComponents = {
   home: HomePage,
   projects: ProjectsPage,
+  teamAchievements: TeamAchievementsPage,
   papers: PapersPage,
   'softwriting&patent': SoftwritingPatentPage,
   honour: HonourPage,
@@ -133,7 +136,7 @@ const scrollToTop = () => {
   .nav-content {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     width: 100%;
     max-width: 1400px;
     padding: 0 5%;
@@ -185,16 +188,21 @@ const scrollToTop = () => {
 
   .nav-menu {
     display: flex;
+    flex: 1;
     list-style: none;
     margin: 0;
     padding: 0;
     gap: 0;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
 
     li {
-      padding: 0 20px;
+      padding: 0 14px;
       line-height: 70px;
       cursor: pointer;
       transition: background 0.3s;
+      white-space: nowrap;
 
       &:hover {
         background: rgba(240, 240, 240, 0.662);
@@ -203,9 +211,10 @@ const scrollToTop = () => {
       a {
         text-decoration: none;
         color: #000;
-        font-size: 20px;
+        font-size: 18px;
         display: block;
         transition: color 0.3s;
+        white-space: nowrap;
 
         &.active {
           font-weight: 600;

@@ -354,6 +354,9 @@ onMounted(async () => {
         flex: 1;
         transition: all 0.3s ease;
         line-height: 1.6;
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
 
         &:hover {
           color: #409eff;

@@ -108,10 +108,10 @@ journal: Cartography and Geographic Information Science
 categories: 
 year: 2021
 issue: 
-date: 2021, 48(2): 151-168
-abstract: 
-keywords: 
-doi: 
+date: 2021
+abstract: Modern technology has given thousands of amateur cartographers not only the opportunity but also the means to make a valuable contribution to mapping at all scales. However, web maps made by amateurs are prone to legibility shortcomings, such as coalescence, complexity, and congestion. These problems can be solved by map generalization; however, for amateurs participating in web mapping, the crucial decision is when to activate generalization. Such a decision is difficult, as the original and target map scales are sometimes uncertain owing to heterogeneous data quality and different output devices. In this study, starting from the identification of different pixels in a rasterized line, we developed a new scale-specific measure to evaluate the degree of legibility (DoL) of individual lines. Our experimental results showed that this measure could reflect the legibility of a line at a given map scale effectively, and could facilitate accurate decisions on whether generalization is necessary. In addition, we fitted a multi-scale legibility function (MSLF) for each line based on DoLs at multiple scales. This function can be used to estimate the legible scale for each line accurately. Our measures are easy to understand, tolerant of data quality, and have great potential for multi-scale spatial data processing.
+keywords: Legibility；legible scale；multi-scale legibility function；map generalization
+doi: 10.1080/15230406.2020.1857307
 language: 英文
 ---
 
@@ -168,7 +168,7 @@ issue: 2期
 date: 2020
 abstract: 互联网用户参与的地图制图容易出现视觉冲突、压盖、拥挤等地图表达问题,需要引入地图自动综合协助解决.网络地图中由于原图比例尺和综合后比例尺均难以准确量化,常规地图自动综合基于"原图比例尺-综合后比例尺"判断是否需要综合的方法已不再适用.矢量数据在可视化后会产生视觉粘连,视觉粘连越明显,地图表达效果越差,综合的需求也越强烈.基于此规律,本文提出对视觉粘连进行定量描述并据此判断是否需要综合.首先,从人类视觉感受出发,结合栅格化思想设计了矢量曲线视觉粘连的量化指标---视觉清晰度.然后,基于"金字塔式"的尺度空间计算曲线在多个比例尺表达的清晰度,并拟合了清晰度的变化函数.最后,将该函数应用于众源地理数据的网络地图综合决策.试验结果表明,本文方法可准确判断每条矢量曲线是否需要综合,能有效解决地理数据尺度异质性带来的可视化难题.同时,清晰度变化函数将曲线的尺度描述由静态数值扩展到连续函数,有望更好地支持多尺度空间数据处理及网络地图综合等问题
 keywords: 网络地图综合 视觉粘 连视觉清晰度 清晰度变化函数 空间粒度
-doi: 
+doi: CNKI:SUN:CHXB.0.2020-02-012
 language: 中文
 ---
 
@@ -211,10 +211,10 @@ science : IJGIS
 categories: 
 year: 2019
 issue: 
-date: 2019, 33(12): 2455-2476
-abstract: 
-keywords: 
-doi: 
+date: 2019
+abstract: Kernel Density Estimation (KDE) is a classic algorithm for analyzing the spatial distribution of point data, and widely applied in spatial humanities analysis. A heat-map permits intuitive visualization of spatial point patterns estimated by KDE without any overlapping. To achieve a suitable heat-map, KDE bandwidth parameter selection is critical. However, most generally applicable bandwidth selectors of KDE with relatively high accuracy encounter intensive computation issues that impede or limit the applications of KDE in big data era. To solve the complex computation problems, as well as make the bandwidths adaptively suitable for spatially heterogenous distributions, we propose a new Quad-tree-based Fast and Adaptive KDE (QFA-KDE) algorithm for heat-map generation. QFA-KDE captures the aggregation patterns of input point data through a quad-tree-based spatial segmentation function. Different bandwidths are adaptively calculated for locations in different grids calculated by the segmentation function; and density is estimated using the calculated adaptive bandwidths. In experiments, through comparisons with three mostly used KDE methods, we quantitatively evaluate the performance of the proposed method in terms of correctness, computation efficiency and visual effects. Experimental results demonstrate the power of the proposed method in computation efficiency and heat-map visual effects while guaranteeing a relatively high accuracy.
+keywords: Kernel Density Estimation (KDE)；heat-map；spatial point pattern；spatial humanities；visualization
+doi: 10.1080/13658816.2018.1555831
 language: 英文
 ---
 
@@ -346,9 +346,9 @@ categories:
 year: 2017
 issue: 
 date: 2017
-abstract: 
+abstract: Due to the miss of scale description information, there are several problems in geospatial visualization and map generalization when using geographic information shared on the web. This study proposed a new model to describe the scale information of vector line data from the perspective of visualization and applied this model in detecting the level of detail (LoD) of volunteered geographic information and visualization of vector data on different devices. Firstly, aiming at measuring the degree of visual coalescence quantitatively, a new index based on the idea of rasterization is designed from the point view of visual perception. This index is then used to construct a model called detail resolution to represent the intrinsic LoD information of vector line. Secondly, detail resolution is utilized to detect and identify the LoD information of OpenStreetMap water dataset. At last, whether a vector line is coalescent or not is inferred by integrating detail resolution, map resolution and device resolution. The proposed detail resolution model will substitute for map scale effectively, especially for web geospatial data like VGI. Detail resolution can support the new form of map visualization containing offline preprocessing and online scale transformation, and also overcomes the visualization problems caused by scale heterogeneity of volunteered geographic information.
 keywords: 
-doi: 
+doi: 10.1007/978-981-10-4424-3_12
 language: 英文
 ---
 
@@ -429,9 +429,9 @@ categories:
 year: 2016
 issue: 
 date: 2016,11(11): e166098
-abstract: 
-keywords: 
-doi: 
+abstract: Many discovery methods for geographic information services have been proposed. There are approaches for finding and matching geographic information services, methods for constructing geographic information service classification schemes, and automatic geographic information discovery. Overall, the efficiency of the geographic information discovery keeps improving., There are however, still two problems in Web Map Service (WMS) discovery that must be solved. Mismatches between the graphic contents of a WMS and the semantic descriptions in the metadata make discovery difficult for human users. End-users and computers comprehend WMSs differently creating semantic gaps in human-computer interactions. To address these problems, we propose an improved query process for WMSs based on the graphic contents of WMS layers, combining Support Vector Machine (SVM) and user relevance feedback. Our experiments demonstrate that the proposed method can improve the accuracy and efficiency of WMS discovery.
+keywords: Imaging techniques；Support vector machines；Computers；Semantics；Forecasting；Geoinformatics；Land use；Graphical user interface
+doi: 10.1371/journal.pone.0166098
 language: 英文
 ---
 
@@ -455,7 +455,7 @@ issue: 2期
 date: 2015.03.23
 abstract: 移动及 Web 环境下，集成各种自发地理信息 POI 数据与地理框架背景数据的混搭式地图应用，越来越多地出现在主流地理信息平台及 LBS 服务中。由于缺乏适宜的在线多尺度可视化机制，这种POI 数据表达上通常出现拥挤、压盖等冲突现象。针对该问题，本研究将传统的尺度变换方法与在线环境相结合，提出一种面向城市设施 POI 数据的多尺度可视化策略。即由服务器端通过预处理方式对POI 数据进行多层次结构化组织；在此基础上，客户端依据显示比例尺导出对应层次的 POI 目标，并通过移位操作解决局部存在的符号表达冲突现象。试验表明，该方法符合数字化网络应用的在线实时需求，同时也能获得较高质量的多尺度表达效果。
 keywords: 自发地理信息 城市设施兴趣点数据 多尺度可视化 在线综合
-doi: 
+doi: 10.11947/j.AGCS.2015.20130564
 language: 中文
 ---
 
@@ -495,8 +495,9 @@ year: 2015
 issue:
 date: 2015, Berlin, Germany
 abstract: 
-keywords: 
-doi: 
+GIS-related education needs support of geo-data and geospatial software. Although there are large amount of geographic information resources distributed on the web, the discovery, process and integration of these resources are still unsolved. Researchers and teachers always searched geo-data by common search engines but results were not satisfied. They also spent much money and energy on purchase and maintenance of various kinds of geospatial software. Aimed at these problems, a cloud-based geospatial collaboration platform called GeoSquare was designed and implemented. The platform serves as a geoportal encouraging geospatial data, information, and knowledge sharing through highly interactive and expressive graphic interfaces. Researchers and teachers can solve their problems effectively in this one-stop solution. Functions, specific design and implementation details are presented in this paper. Site of GeoSquare is: http://geosquare.tianditu.com/
+keywords: GEOGRAPHIC information systems；GEOSPATIAL data；CLOUD computing；COMPUTER software；COMPUTER graphics
+doi: 10.5194/isprsarchives-XL-6-W1-1-2015
 language: 英文
 ---
 
@@ -554,8 +555,8 @@ categories:
 year: 2013
 issue: 
 date: 2013,41(0): 219-233
-abstract: 
-keywords: 
+abstract: Shape cognition and representation play an important role in spatial analysis because shape contains some characteristics of geographic phenomena that can be mined to discover hidden geographic principles. As a difficult cognition problem, the shape representation problem in CIS field has the properties of abstraction, indetermination and symbolization. How to use a model to represent shape cognition in our mental world and how to use a single number to compute the shape measure are interesting questions. In the image processing domain, there are many shape measure methods, but there are few proposals for corresponding vector data. This study aims to build a polygon shape measure and offers a Fourier transform-based method to compute the degree of shape similarity. The procedure first represents the boundary of the vector polygon shape as a periodic function, which is expanded in a Fourier descriptor series, and then, it obtains a set of coefficients that capture the shape information. Through the experiment on spatial shape match and shape query, the study shows that Fourier transform-based shape identification and template matching is consistent with human cognition.
+keywords: Spatial cognition；Shape measure；Fourier transform；Shape matching
 doi: 
 language: 英文
 ---

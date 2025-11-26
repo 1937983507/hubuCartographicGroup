@@ -51,13 +51,11 @@
 
       <!-- 摘要 -->
       <div v-if="paper.abstract" class="abstract-section">
-        <span class="abstract-label">摘要:</span>
-        <span class="abstract-text">{{ paper.abstract }}</span>
+        <span class="abstract-label">摘要:</span><span class="abstract-text">{{ paper.abstract }}</span>
       </div>
-
       <!-- 关键词 -->
       <div v-if="paper.keywords" class="keywords-section">
-        <span class="keywords">{{ paper.keywords }}</span>
+        <span class="keywords-label">关键词：</span><span class="keywords">{{ Array.isArray(paper.keywords) ? paper.keywords.join('、') : paper.keywords }}</span>
       </div>
       </div>
     </div>
@@ -85,6 +83,10 @@ const props = defineProps({
     default: () => []
   },
   selectedTypes: {
+    type: Array,
+    default: () => []
+  },
+  selectedCategories: {
     type: Array,
     default: () => []
   }
@@ -120,6 +122,22 @@ const filteredAndSortedPapers = computed(() => {
     result = result.filter(paper => {
       const type = paper.type || ''
       return props.selectedTypes.includes(type)
+    })
+  }
+  
+  // 分类(categories)筛选
+  if (props.selectedCategories && props.selectedCategories.length > 0) {
+    result = result.filter(paper => {
+      let cats = []
+      if (!paper.categories || (Array.isArray(paper.categories) && paper.categories.length === 0)) {
+        cats = ['无']
+      } else if (Array.isArray(paper.categories)) {
+        cats = paper.categories.length > 0 ? paper.categories : ['无']
+      } else if (typeof paper.categories === 'string') {
+        cats = paper.categories.split(/[、,]/).map(c => c.trim()).filter(Boolean)
+        if (cats.length === 0) cats = ['无']
+      }
+      return cats.some(cat => props.selectedCategories.includes(cat))
     })
   }
   
@@ -419,23 +437,27 @@ onMounted(async () => {
       line-height: 1.75;
       font-size: 14px;
       color: #555;
-
+      display: flex;
+      align-items: flex-start;
       .abstract-label {
         font-weight: 600;
         color: #333;
-        margin-right: 8px;
+        margin-right: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
-
       .abstract-text {
+        color: #555;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        color: #555;
+        word-break: break-all;
+        overflow-wrap: anywhere;
+        white-space: normal;
+        flex: 1;
       }
     }
 
@@ -443,7 +465,15 @@ onMounted(async () => {
       margin-top: 10px;
       font-size: 13px;
       color: #666;
-
+      display: flex;
+      align-items: flex-start;
+      .keywords-label {
+        font-weight: 600;
+        color: #333;
+        margin-right: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
       .keywords {
         word-spacing: 10px;
         letter-spacing: 0.3px;

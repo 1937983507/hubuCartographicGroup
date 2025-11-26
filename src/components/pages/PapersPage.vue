@@ -16,41 +16,62 @@
           </el-radio-group>
         </div>
         
+        <!-- 年份筛选 -->
         <div class="filter-group">
-          <span class="filter-label">年份:</span>
+          <span class="filter-label">年份:
+            <el-button-group style="margin-left:6px">
+              <el-button size="small" @click="selectedYears = [...availableYears]">全选</el-button>
+              <el-button size="small" @click="selectedYears = []">全不选</el-button>
+            </el-button-group>
+          </span>
           <el-checkbox-group v-model="selectedYears" size="small">
             <el-checkbox 
-              v-for="year in availableYears" 
-              :key="year" 
-              :label="year"
-            >
+              v-for="year in availableYears"
+              :key="year"
+              :label="year">
               {{ year }}年
             </el-checkbox>
           </el-checkbox-group>
         </div>
-        
+        <!-- 语言筛选 -->
         <div class="filter-group">
-          <span class="filter-label">语言:</span>
+          <span class="filter-label">语言:
+            <el-button-group style="margin-left:6px">
+              <el-button size="small" @click="selectedLanguages = [...availableLanguages]">全选</el-button>
+              <el-button size="small" @click="selectedLanguages = []">全不选</el-button>
+            </el-button-group>
+          </span>
           <el-checkbox-group v-model="selectedLanguages" size="small">
-            <el-checkbox 
-              v-for="lang in availableLanguages" 
-              :key="lang" 
-              :label="lang"
-            >
+            <el-checkbox v-for="lang in availableLanguages" :key="lang" :label="lang">
               {{ lang }}
             </el-checkbox>
           </el-checkbox-group>
         </div>
-        
+        <!-- 类型筛选 -->
         <div class="filter-group">
-          <span class="filter-label">类型:</span>
+          <span class="filter-label">类型:
+            <el-button-group style="margin-left:6px">
+              <el-button size="small" @click="selectedTypes = [...availableTypes]">全选</el-button>
+              <el-button size="small" @click="selectedTypes = []">全不选</el-button>
+            </el-button-group>
+          </span>
           <el-checkbox-group v-model="selectedTypes" size="small">
-            <el-checkbox 
-              v-for="type in availableTypes" 
-              :key="type" 
-              :label="type"
-            >
+            <el-checkbox v-for="type in availableTypes" :key="type" :label="type">
               {{ type }}
+            </el-checkbox>
+          </el-checkbox-group>
+        </div>
+        <!-- 分类筛选 -->
+        <div class="filter-group">
+          <span class="filter-label">来源:
+            <el-button-group style="margin-left:6px">
+              <el-button size="small" @click="selectedCategories = [...availableCategories]">全选</el-button>
+              <el-button size="small" @click="selectedCategories = []">全不选</el-button>
+            </el-button-group>
+          </span>
+          <el-checkbox-group v-model="selectedCategories" size="small">
+            <el-checkbox v-for="cat in availableCategories" :key="cat" :label="cat">
+              {{ cat }}
             </el-checkbox>
           </el-checkbox-group>
         </div>
@@ -68,6 +89,7 @@
           :selected-years="selectedYears"
           :selected-languages="selectedLanguages"
           :selected-types="selectedTypes"
+          :selected-categories="selectedCategories"
           @papers-loaded="handlePapersLoaded"
         />
       </div>
@@ -84,10 +106,12 @@ const sortOrder = ref('desc')
 const selectedYears = ref([])
 const selectedLanguages = ref([])
 const selectedTypes = ref([])
+const selectedCategories = ref([])
 
 const availableYears = ref([])
 const availableLanguages = ref([])
 const availableTypes = ref([])
+const availableCategories = ref([])
 const filteredCount = ref(0)
 const loading = ref(true)
 
@@ -102,6 +126,7 @@ const parsePapersForOptions = async () => {
     const years = new Set()
     const languages = new Set()
     const types = new Set()
+    const categories = new Set()
     
     sections.forEach(section => {
       const lines = section.trim().split('\n')
@@ -158,11 +183,31 @@ const parsePapersForOptions = async () => {
       if (paper.year) years.add(String(paper.year))
       if (paper.language) languages.add(paper.language)
       if (paper.type) types.add(paper.type)
+      // 收集categories，将无分类的归为“无”
+      if (paper.categories) {
+        if (Array.isArray(paper.categories)) {
+          let found = false
+          paper.categories.forEach(c => {
+            if (c) {
+              found = true
+              categories.add(c)
+            }
+          })
+          if (!found) categories.add('无')
+        } else if (typeof paper.categories === 'string' && paper.categories) {
+          paper.categories.split(/[、,]/).map(c => c.trim()).forEach(c => c && categories.add(c))
+        } else {
+          categories.add('无')
+        }
+      } else {
+        categories.add('无')
+      }
     })
     
     availableYears.value = Array.from(years).sort((a, b) => parseInt(b) - parseInt(a))
     availableLanguages.value = Array.from(languages).sort()
     availableTypes.value = Array.from(types).sort()
+    availableCategories.value = Array.from(categories).sort()
   } catch (error) {
     console.error('Failed to load papers for options:', error)
   }
@@ -179,11 +224,19 @@ const clearFilters = () => {
   selectedYears.value = []
   selectedLanguages.value = []
   selectedTypes.value = []
+  selectedCategories.value = []
   sortOrder.value = 'desc'
 }
 
 onMounted(() => {
   parsePapersForOptions()
+  // 自动全选所有复选框
+  setTimeout(() => {
+    selectedYears.value = [...availableYears.value]
+    selectedLanguages.value = [...availableLanguages.value]
+    selectedTypes.value = [...availableTypes.value]
+    selectedCategories.value = [...availableCategories.value]
+  }, 500) // 等待数据加载
 })
 </script>
 
@@ -235,11 +288,11 @@ onMounted(() => {
       border-bottom: 1px solid rgb(227, 227, 227);
       
       .filter-group {
-        margin-bottom: 16px;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         flex-wrap: wrap;
-        gap: 12px;
+        margin-bottom: 16px;
+        gap: 8px;
         
         &:last-of-type {
           margin-bottom: 0;
@@ -249,8 +302,24 @@ onMounted(() => {
           font-weight: 600;
           color: #333;
           font-size: 14px;
-          min-width: 50px;
-          padding-top: 4px;
+          display: flex;
+          align-items: center;
+          margin-right: 0;
+          padding-top: 0;
+          white-space: nowrap;
+          .el-button-group {
+            margin-left: 6px;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .el-checkbox-group {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          flex: 1 1 0;
+          min-width: 0;
+          gap: 6px;
         }
       }
       

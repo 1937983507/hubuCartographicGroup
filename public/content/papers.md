@@ -53,24 +53,6 @@ language: 中文
 ---
 
 ---
-title: 
-link: 
-type: 
-authors: 
-  - 成晓强
-journal: 
-categories: 
-  - 
-year: 
-issue: 
-date: 
-abstract: 
-keywords: 
-doi: 
-language: 
----
-
----
 title: 以用户地理位置为中心的兴趣点标签云
 link: https://d.wanfangdata.com.cn/periodical/dqxxkx202401009
 type: 期刊论文

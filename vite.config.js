@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/hubu-cartographic-group/',
+  base: '/cxq-group/',
   plugins: [vue()],
   resolve: {
     alias: {

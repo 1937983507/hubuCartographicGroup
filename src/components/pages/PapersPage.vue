@@ -115,10 +115,17 @@ const availableCategories = ref([])
 const filteredCount = ref(0)
 const loading = ref(true)
 
+const getBaseUrl = () => {
+  const base = import.meta.env.BASE_URL || '/'
+  return base.endsWith('/') ? base : `${base}/`
+}
+
 // 解析论文数据以获取可用选项
 const parsePapersForOptions = async () => {
   try {
-    const response = await fetch('/content/papers.md')
+    const baseUrl = getBaseUrl()
+    const url = `${baseUrl}content/papers.md`
+    const response = await fetch(url)
     if (!response.ok) return
     const text = await response.text()
     const sections = text.split(/^---$/m).map(s => s.trim()).filter(s => s)

@@ -18,11 +18,11 @@
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.4",
-    "eslint": "^9.13.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.29.1",
     "sass": "^1.80.4",
-    "vite": "^5.4.8"
+    "vite": "^4.5.0"
   }
 }
 

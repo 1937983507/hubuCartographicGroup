@@ -42,6 +42,21 @@ const error = ref('')
 
 const normalizeValue = line => line.split(':').slice(1).join(':').trim()
 
+const resolveImageUrl = (raw) => {
+  if (!raw) return ''
+  // 绝对 URL 直接返回
+  if (/^https?:\/\//i.test(raw)) return raw
+
+  // 去掉前导的 public/，因为打包后会被提到根目录
+  let path = raw.replace(/^public\//, '').replace(/^\/public\//, '')
+
+  // 去掉开头的 /，后面用 BASE_URL 统一拼接
+  path = path.replace(/^\//, '')
+
+  const baseUrl = getBaseUrl()
+  return `${baseUrl}${path}`
+}
+
 const parseMarkdown = text => {
   const lines = text.split('\n')
   const parsedCards = []
@@ -71,7 +86,7 @@ const parseMarkdown = text => {
     if (!current) return
 
     if (line.toLowerCase().startsWith('image:')) {
-      current.image = normalizeValue(line)
+      current.image = resolveImageUrl(normalizeValue(line))
     } else if (line.toLowerCase().startsWith('link:')) {
       current.link = normalizeValue(line)
     } else if (line) {
@@ -88,12 +103,19 @@ const parseMarkdown = text => {
   cards.value = parsedCards
 }
 
+const getBaseUrl = () => {
+  const base = import.meta.env.BASE_URL || '/'
+  return base.endsWith('/') ? base : `${base}/`
+}
+
 const loadContent = async () => {
   loading.value = true
   error.value = ''
 
   try {
-    const response = await fetch('/content/team-achievements.md')
+    const baseUrl = getBaseUrl()
+    const url = `${baseUrl}content/team-achievements.md`
+    const response = await fetch(url)
     if (!response.ok) {
       throw new Error(`加载失败（${response.status}）`)
     }

@@ -320,9 +320,16 @@ const parsePapers = (text) => {
   return papers
 }
 
+const getBaseUrl = () => {
+  const base = import.meta.env.BASE_URL || '/'
+  return base.endsWith('/') ? base : `${base}/`
+}
+
 onMounted(async () => {
   try {
-    const response = await fetch(`/content/${props.file}`)
+    const baseUrl = getBaseUrl()
+    const url = `${baseUrl}content/${props.file}`
+    const response = await fetch(url)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

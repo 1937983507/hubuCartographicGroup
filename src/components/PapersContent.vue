@@ -107,6 +107,14 @@ const props = defineProps({
   selectedCategories: {
     type: Array,
     default: () => []
+  },
+  searchKeyword: {
+    type: String,
+    default: ''
+  },
+  searchType: {
+    type: String,
+    default: 'title' // title, keywords, abstract
   }
 })
 
@@ -119,6 +127,30 @@ const emit = defineEmits(['papers-loaded', 'papers-data-loaded'])
 // 计算筛选和排序后的论文列表
 const filteredAndSortedPapers = computed(() => {
   let result = [...papers.value]
+  
+  // 搜索筛选
+  if (props.searchKeyword && props.searchKeyword.trim()) {
+    const keyword = props.searchKeyword.trim().toLowerCase()
+    result = result.filter(paper => {
+      if (props.searchType === 'title') {
+        // 篇名搜索
+        const title = paper.title ? paper.title.toLowerCase() : ''
+        return title.includes(keyword)
+      } else if (props.searchType === 'keywords') {
+        // 关键词搜索
+        const keywords = paper.keywords || ''
+        const keywordsStr = Array.isArray(keywords) 
+          ? keywords.join(' ').toLowerCase()
+          : keywords.toLowerCase()
+        return keywordsStr.includes(keyword)
+      } else if (props.searchType === 'abstract') {
+        // 摘要搜索
+        const abstract = paper.abstract ? paper.abstract.toLowerCase() : ''
+        return abstract.includes(keyword)
+      }
+      return true
+    })
+  }
   
   // 年份筛选
   if (props.selectedYears.length > 0) {

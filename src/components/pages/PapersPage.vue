@@ -7,6 +7,44 @@
         <span class="section-title-left">学术论文</span>
       </div>
       
+      <!-- 搜索栏 -->
+      <div class="search-bar">
+        <el-select
+          v-model="searchType"
+          placeholder="搜索类型"
+          class="search-type-select"
+          @change="handleSearch">
+          <el-option label="篇名" value="title" />
+          <el-option label="关键词" value="keywords" />
+          <el-option label="摘要" value="abstract" />
+        </el-select>
+        <el-input
+          v-model="searchKeyword"
+          placeholder="请输入搜索关键词"
+          clearable
+          class="search-input"
+          @input="handleSearch"
+          @clear="handleSearch">
+          <template #prefix>
+            <el-icon><Search /></el-icon>
+          </template>
+        </el-input>
+        <el-button
+          type="primary"
+          :icon="Search"
+          @click="handleSearch"
+          class="search-button">
+          搜索
+        </el-button>
+        <el-button
+          v-if="searchKeyword"
+          :icon="RefreshLeft"
+          @click="clearSearch"
+          class="clear-search-button">
+          清除
+        </el-button>
+      </div>
+      
       <div class="section-content">
         <PapersContent 
           file="papers.md" 
@@ -15,6 +53,8 @@
           :selected-languages="selectedLanguages"
           :selected-types="selectedTypes"
           :selected-categories="selectedCategories"
+          :search-keyword="searchKeyword"
+          :search-type="searchType"
           @papers-loaded="handlePapersLoaded"
           @papers-data-loaded="handlePapersDataLoaded"
         />
@@ -175,7 +215,8 @@ import {
   ChatDotRound, 
   DocumentCopy, 
   Collection,
-  RefreshLeft
+  RefreshLeft,
+  Search
 } from '@element-plus/icons-vue'
 import PapersContent from '../PapersContent.vue'
 
@@ -193,6 +234,8 @@ const filteredCount = ref(0)
 const loading = ref(true)
 const activeCollapseItems = ref(['sort']) // 默认只展开排序
 const allPapers = ref([]) // 存储所有论文数据用于计算数量
+const searchKeyword = ref('') // 搜索关键词
+const searchType = ref('title') // 搜索类型：title(篇名)、keywords(关键词)、abstract(摘要)
 
 const getBaseUrl = () => {
   const base = import.meta.env.BASE_URL || '/'
@@ -346,6 +389,16 @@ const clearFilters = () => {
   sortOrder.value = 'desc'
 }
 
+const handleSearch = () => {
+  // 搜索逻辑在 PapersContent 组件中实现
+  // 这里只需要触发更新即可
+}
+
+const clearSearch = () => {
+  searchKeyword.value = ''
+  handleSearch()
+}
+
 onMounted(() => {
   parsePapersForOptions()
   // 自动全选所有复选框
@@ -403,6 +456,32 @@ onMounted(() => {
       }
     }
 
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(248, 249, 250, 0.6);
+      border-bottom: 1px solid rgba(227, 227, 227, 0.5);
+
+      .search-input {
+        flex: 1;
+        max-width: 400px;
+      }
+
+      .search-type-select {
+        width: 120px;
+      }
+
+      .search-button {
+        flex-shrink: 0;
+      }
+
+      .clear-search-button {
+        flex-shrink: 0;
+      }
+    }
+
     .section-content {
       padding: 20px;
       line-height: 30px;
@@ -420,8 +499,8 @@ onMounted(() => {
 
   .filter-sidebar {
     width: 300px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-    border: 1px solid rgba(227, 227, 227, 0.8);
+    background: rgba(255, 255, 255, 0.733);
+    border: 1px solid rgb(227, 227, 227);
     border-radius: 12px;
     padding: 16px;
     height: fit-content;
@@ -430,7 +509,7 @@ onMounted(() => {
     left: calc(100% + 20px); // 位于page-section右侧，添加20px间距
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     z-index: 10;
 

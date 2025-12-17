@@ -606,6 +606,26 @@ language: 英文
 ---
 
 ---
+title: The analysis and measurement of building patterns using texton co-occurrence matrices
+link: https://www.tandfonline.com/doi/full/10.1080/13658816.2016.1265121
+type: 期刊论文
+authors:
+  - Wenhao Yu
+  - Tinghua Ai
+  - Pengcheng Liu
+  - Xiaoqiang Cheng
+journal: International Journal of Geographical Information Science
+categories: 
+year: 2016
+issue: 
+date: 2016
+abstract: The representation and analysis of building patterns are critical for characterizing urban scenes and making decisions in urban planning. The evaluation of building patterns is a difficult spatial analysis problem that exhibits properties of symbolization, homogeneity and regularity. Open issues in this field include the development of approaches for representing building patterns and vector-based methods for computing various pattern metrics. In the image analysis domain, there are many methods for pattern recognition (e.g., texture analysis), but there are few corresponding solutions for vector data. The aim of this research is to develop several building pattern metrics and offer a texton co-occurrence matrix (TCM)-based method to quantitatively evaluate the features of building patterns. The procedure first constructs a spatial field based on a Delaunay triangulation skeleton to partition a set of buildings into a set of tessellation cells. The tessellations of building clusters have a similar structure as image representations, in that each cell corresponds to an image pixel. We then use the texton analysis to establish a matrix to describe the tessellation structure, including the neighboring relationships and individual attribute information. Finally, a set of feature descriptors is obtained from the TCM to capture the texture-related information of building groups. Through experiments on building pattern analysis and spatial queries, we show that the results of TCM-based evaluation of building patterns are consistent with those of human cognition.
+keywords: Building pattern；spatial cognition；texture analysis；texton co-occurrence matrix；
+doi: 10.1080/13658816.2016.1265121
+language: 英文
+---
+
+---
 title: 自发地理信息兴趣点数据在线综合与多尺度可视化方法
 link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI1MTExNzE2MDExNxIOY2h4YjIwMTUwMjAwMTcaCG5oamppdnp6
 type: 期刊论文
@@ -651,7 +671,28 @@ language: 中文
 ---
 
 ---
-title: A CLOUD-BASED PLATFORM SUPPORTING GEOSPATIAL COLLABORATION FOR GIS EDUCATION: ISPRS Workshop of Commission VI 1-3, Advances in Web-based Education Services
+title: A Real-time Generalization and Multi-scale Visualization Method for POI Data in Volunteered Geographic Information
+link: https://www.semanticscholar.org/paper/A-Real-time-Generalization-and-Multi-scale-Method-Min-Tinghua/a9ef4fe872aa6c2c0da300eaee78b6a46578e0d7
+type: 期刊论文
+authors:
+  - M Yang
+  - AI Tinghua
+  - LU Wei
+  - X Cheng
+  - Q Zhou
+journal: Acta Geodaetica Et Cartographica Sinica
+categories: 
+year: 2015
+issue:
+date: 2015
+abstract: With the development of mobile and Web technologies,there has been an increasing number of mapbased mashups which display different kinds of POI data in volunteered geographic information.Due to the lack of suitable mechanisms for multi-scale visualization,the display of the POI data often results in the icon clustering problem with icons touching and overlapping each other.This paper introduces a multi-scale visualization method for urban facility POI data by combing the classic methods of generalization and on-line environment.Firstly,we organize the POI data into hierarchical structure by preprocessing in the server-side;the POI features then will be obtained based on the display scale in the client-side and the displacement operation will be executed to resolve the local icon conflicts.Experiments show that this approach can not only achieve the requirements of real-time online,but also can get better multi-scale representation of POI data.
+keywords: volunteered geographic information；urban facility POI data；multi-scale visualization；realtime generalization
+doi: 10.11947/j.AGCS.2015.20130564
+language: 英文
+---
+
+---
+title: A CLOUD-BASED PLATFORM SUPPORTING GEOSPATIAL COLLABORATION FOR GIS EDUCATION
 link: https://isprs-archives.copernicus.org/articles/XL-6-W1/1/2015/
 type: 会议论文
 authors:
@@ -663,9 +704,8 @@ journal: ISPRS Workshop of Commission VI 1-3, Advances in Web-based Education Se
 categories: 
 year: 2015
 issue:
-date: 2015, Berlin, Germany
-abstract: 
-GIS-related education needs support of geo-data and geospatial software. Although there are large amount of geographic information resources distributed on the web, the discovery, process and integration of these resources are still unsolved. Researchers and teachers always searched geo-data by common search engines but results were not satisfied. They also spent much money and energy on purchase and maintenance of various kinds of geospatial software. Aimed at these problems, a cloud-based geospatial collaboration platform called GeoSquare was designed and implemented. The platform serves as a geoportal encouraging geospatial data, information, and knowledge sharing through highly interactive and expressive graphic interfaces. Researchers and teachers can solve their problems effectively in this one-stop solution. Functions, specific design and implementation details are presented in this paper. Site of GeoSquare is: http://geosquare.tianditu.com/
+date: 2015
+abstract: GIS-related education needs support of geo-data and geospatial software. Although there are large amount of geographic information resources distributed on the web, the discovery, process and integration of these resources are still unsolved. Researchers and teachers always searched geo-data by common search engines but results were not satisfied. They also spent much money and energy on purchase and maintenance of various kinds of geospatial software. Aimed at these problems, a cloud-based geospatial collaboration platform called GeoSquare was designed and implemented. The platform serves as a geoportal encouraging geospatial data, information, and knowledge sharing through highly interactive and expressive graphic interfaces. Researchers and teachers can solve their problems effectively in this one-stop solution. Functions, specific design and implementation details are presented in this paper. Site of GeoSquare is: http://geosquare.tianditu.com/
 keywords: GEOGRAPHIC information systems；GEOSPATIAL data；CLOUD computing；COMPUTER software；COMPUTER graphics
 doi: 10.5194/isprsarchives-XL-6-W1-1-2015
 language: 英文
@@ -742,9 +782,28 @@ journal: Computers, Environment and Urban Systems
 categories:
 year: 2013
 issue: 
-date: 2013,41(0): 219-233
+date: 2013
 abstract: Shape cognition and representation play an important role in spatial analysis because shape contains some characteristics of geographic phenomena that can be mined to discover hidden geographic principles. As a difficult cognition problem, the shape representation problem in CIS field has the properties of abstraction, indetermination and symbolization. How to use a model to represent shape cognition in our mental world and how to use a single number to compute the shape measure are interesting questions. In the image processing domain, there are many shape measure methods, but there are few proposals for corresponding vector data. This study aims to build a polygon shape measure and offers a Fourier transform-based method to compute the degree of shape similarity. The procedure first represents the boundary of the vector polygon shape as a periodic function, which is expanded in a Fourier descriptor series, and then, it obtains a set of coefficients that capture the shape information. Through the experiment on spatial shape match and shape query, the study shows that Fourier transform-based shape identification and template matching is consistent with human cognition.
 keywords: Spatial cognition；Shape measure；Fourier transform；Shape matching
+doi: 
+language: 英文
+---
+
+---
+title: Adaptive Cartography in the Context of Neoge -ography and Ubiquitous Computing: Some Research Issues
+link: https://icaci.org/files/documents/ICC_proceedings/ICC2013/_extendedAbstract/270_proceeding.pdf
+type: 会议论文
+authors:
+  - Z Xiang
+  - T Ai
+  - X Cheng
+journal: International Cartographic Conference
+categories:
+year: 2013
+issue: 
+date: 2013
+abstract: Web 2.0 and ubiquitous computing together provide a promising technological framework for individuals to map the world and events that are happening around them and encourage free use of these maps where network connection is available. For example, once people publish information via the new social media such as Facebook, it is technically possible for their friends to get informed of this information very quickly. As much of such information contains geographic loca tions or information (e.g. place names) that can be georeferenced (in forms of POIs), maps provide a better interface to facilitate the information communication process. This envisions an environment for real-time geocollaboration (Chang & Li 2012), and everyone should be able to obtain knowledge as spatial relationships of events structure themselves on maps (e.g. it becomes easy to identify the nearest friend in one 's neighborhood).On the other hand, as handheld devices become smarter and more spatially capable (with built -in internet accessibility, GPS, compass, etc.), people with no geospatial expertise now are more easily than ever engaged in the using, sharing and distribution of spatial information (in the form of framework data). A famous example is OpenStreetMap (OSM), where everyone can collect and edit spatial data of their familiar places and contribute to the map worldwide. Goodchild (2007) described this phenomenon under the umbrella of citizen science and termed it volunteered geographic information (VGI) as a special case of the wider Web 2.0 practice of user generated content. This may substantially change the way how the general public and scientists from other domains use maps. With all the possibilities provided by this new context, however, the question is that are there problems from a cartographic perspective? Are there problems in how individuals make and use these maps? Are current cartographic theories sufficient (need for neo-cartography)? And all in all, what are the unique contributions that the cartographic domain can offer? Kraak (2011) expressed similar concerns and argued that there is no need for neo-cartography. However, he added further that one should make better use of current cartographic design knowledge to enable an ef fective visualization. This paper further identifies some of the basic problems of cartography in this new context. The issues concerned have a more cartographic and geospatial flavor. In doing so, we went through several case studies. The results are desc ribed in the following: (1) Heterogeneity between informal (e.g. OSM) and formal information sources. The heterogeneity lies in terms of semantics, fidelity and scale of spatial data to be integrated. How should diverse spatial data be integrated to benefit bo th sides? (2) Poor map design. Although there are many web services for map styling, the control over symbol design and color scheme is still limited. How can cartographic knowledge be better integrated into the tools? (3) Graphic information overload. This problem is now usually ignored by neogeographers. Cartographic generalization has long been dealing with such problems. How should existing approaches be adapted for the new context? (4) Adaptive visualization has always been an important area where various user groups and devices impose diverse map requirements. Apparently, it becomes even demanded in the context of ubiquitous mapping as user requirements and how people interact with maps cannot be determined statically. The question is therefore: how should we model the user and context in order to provide the right person with the right information in a timely and usable way?
+keywords: adaptive visualization；generalization；context - aware applications；customizable map content；map design；volunteered geographicin-formation
 doi: 
 language: 英文
 ---

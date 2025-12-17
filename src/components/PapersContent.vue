@@ -73,7 +73,13 @@
       </div>
       <!-- 关键词 -->
       <div v-if="paper.keywords" class="keywords-section">
-        <span class="keywords-label">关键词：</span><span class="keywords">{{ Array.isArray(paper.keywords) ? paper.keywords.join('、') : paper.keywords }}</span>
+        <span class="keywords-label">关键词：</span>
+        <span class="keywords">
+          <template v-for="(keyword, index) in formatKeywords(paper.keywords)" :key="index">
+            <span class="keyword-item">{{ keyword }}</span>
+            <span v-if="index < formatKeywords(paper.keywords).length - 1" class="keyword-separator">、</span>
+          </template>
+        </span>
       </div>
       </div>
     </div>
@@ -234,6 +240,42 @@ const formatDate = (paper) => {
     return `${paper.year}年`
   }
   return `${paper.year}年`
+}
+
+// 格式化关键词，统一处理各种分隔符
+const formatKeywords = (keywords) => {
+  if (!keywords) return []
+  
+  // 如果已经是数组，直接返回
+  if (Array.isArray(keywords)) {
+    return keywords.filter(k => k && k.trim())
+  }
+  
+  // 如果是字符串，需要解析
+  if (typeof keywords === 'string') {
+    let result = []
+    
+    // 检查是否包含分号或逗号（优先分隔符）
+    if (/[；;，,]/.test(keywords)) {
+      // 如果包含分号或逗号，优先使用这些分隔符，不再按空格分割
+      // 这样可以保留像 "Remote sensing"、"Market research" 这样的多词关键词
+      result = keywords
+        .split(/[；;]/)  // 先按分号分割（中文分号和英文分号）
+        .flatMap(item => item.split(/[,，]/))  // 再按逗号分割（中文逗号和英文逗号）
+        .map(k => k.trim())
+        .filter(k => k)  // 过滤空字符串
+    } else {
+      // 如果没有分号和逗号，才使用空格分割（适用于中文关键词用空格分隔的情况）
+      result = keywords
+        .split(/\s+/)  // 按空格分割（包括多个连续空格）
+        .map(k => k.trim())
+        .filter(k => k)  // 过滤空字符串
+    }
+    
+    return result
+  }
+  
+  return []
 }
 
 const isAbstractExpanded = (index) => {
@@ -577,17 +619,44 @@ onMounted(async () => {
       font-size: 13px;
       color: #666;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      flex-wrap: nowrap;
+      
       .keywords-label {
         font-weight: 600;
         color: #333;
         margin-right: 4px;
         white-space: nowrap;
         flex-shrink: 0;
+        line-height: 1.5;
       }
+      
       .keywords {
-        word-spacing: 10px;
-        letter-spacing: 0.3px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0;
+        line-height: 1.4;
+        flex: 1;
+        min-width: 0;
+        
+        .keyword-item {
+          display: inline-block;
+          padding: 2px 6px;
+          background: rgba(128, 128, 128, 0.1);
+          border-radius: 4px;
+          margin-right: 4px;
+          color: #666;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 1.4;
+          letter-spacing: 0;
+        }
+        
+        .keyword-separator {
+          margin: 0 2px;
+          color: #999;
+        }
       }
     }
   }

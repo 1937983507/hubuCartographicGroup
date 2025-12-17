@@ -114,7 +114,7 @@ const papers = ref([])
 const loading = ref(true)
 const expandedAbstracts = ref({})
 
-const emit = defineEmits(['papers-loaded'])
+const emit = defineEmits(['papers-loaded', 'papers-data-loaded'])
 
 // 计算筛选和排序后的论文列表
 const filteredAndSortedPapers = computed(() => {
@@ -335,9 +335,12 @@ onMounted(async () => {
     }
     const text = await response.text()
     papers.value = parsePapers(text)
+    // 发送所有论文数据给父组件
+    emit('papers-data-loaded', papers.value)
   } catch (error) {
     console.error('Failed to load papers file:', error)
     papers.value = []
+    emit('papers-data-loaded', [])
   } finally {
     loading.value = false
   }

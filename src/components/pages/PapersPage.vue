@@ -1,85 +1,10 @@
 <template>
   <div class="papers-page">
+    <!-- 左侧内容区域 -->
     <div class="page-section">
       <div class="section-title">
         <el-icon class="section-icon"><Document /></el-icon>
         <span class="section-title-left">学术论文</span>
-      </div>
-      
-      <!-- 筛选工具栏 -->
-      <div class="filter-toolbar">
-        <div class="filter-group">
-          <span class="filter-label">排序:</span>
-          <el-radio-group v-model="sortOrder" size="small">
-            <el-radio-button label="desc">时间降序</el-radio-button>
-            <el-radio-button label="asc">时间升序</el-radio-button>
-          </el-radio-group>
-        </div>
-        
-        <!-- 年份筛选 -->
-        <div class="filter-group">
-          <span class="filter-label">年份:
-            <el-button-group style="margin-left:6px">
-              <el-button size="small" @click="selectedYears = [...availableYears]">全选</el-button>
-              <el-button size="small" @click="selectedYears = []">全不选</el-button>
-            </el-button-group>
-          </span>
-          <el-checkbox-group v-model="selectedYears" size="small">
-            <el-checkbox 
-              v-for="year in availableYears"
-              :key="year"
-              :label="year">
-              {{ year }}年
-            </el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <!-- 语言筛选 -->
-        <div class="filter-group">
-          <span class="filter-label">语言:
-            <el-button-group style="margin-left:6px">
-              <el-button size="small" @click="selectedLanguages = [...availableLanguages]">全选</el-button>
-              <el-button size="small" @click="selectedLanguages = []">全不选</el-button>
-            </el-button-group>
-          </span>
-          <el-checkbox-group v-model="selectedLanguages" size="small">
-            <el-checkbox v-for="lang in availableLanguages" :key="lang" :label="lang">
-              {{ lang }}
-            </el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <!-- 类型筛选 -->
-        <div class="filter-group">
-          <span class="filter-label">类型:
-            <el-button-group style="margin-left:6px">
-              <el-button size="small" @click="selectedTypes = [...availableTypes]">全选</el-button>
-              <el-button size="small" @click="selectedTypes = []">全不选</el-button>
-            </el-button-group>
-          </span>
-          <el-checkbox-group v-model="selectedTypes" size="small">
-            <el-checkbox v-for="type in availableTypes" :key="type" :label="type">
-              {{ type }}
-            </el-checkbox>
-          </el-checkbox-group>
-        </div>
-        <!-- 分类筛选 -->
-        <div class="filter-group">
-          <span class="filter-label">来源:
-            <el-button-group style="margin-left:6px">
-              <el-button size="small" @click="selectedCategories = [...availableCategories]">全选</el-button>
-              <el-button size="small" @click="selectedCategories = []">全不选</el-button>
-            </el-button-group>
-          </span>
-          <el-checkbox-group v-model="selectedCategories" size="small">
-            <el-checkbox v-for="cat in availableCategories" :key="cat" :label="cat">
-              {{ cat }}
-            </el-checkbox>
-          </el-checkbox-group>
-        </div>
-        
-        <div class="filter-actions">
-          <el-button size="small" @click="clearFilters">清除筛选</el-button>
-          <span class="result-count">共 {{ filteredCount }} 篇</span>
-        </div>
       </div>
       
       <div class="section-content">
@@ -91,15 +16,167 @@
           :selected-types="selectedTypes"
           :selected-categories="selectedCategories"
           @papers-loaded="handlePapersLoaded"
+          @papers-data-loaded="handlePapersDataLoaded"
         />
       </div>
     </div>
+    
+    <!-- 右侧筛选工具栏 -->
+    <div class="filter-sidebar">
+        <div class="filter-header">
+          <div class="filter-title-wrapper">
+            <el-icon class="filter-icon"><Filter /></el-icon>
+            <span class="filter-title">筛选条件</span>
+          </div>
+          <div class="result-count-badge">
+            <span class="result-count">共 {{ filteredCount }} 篇</span>
+          </div>
+        </div>
+        
+        <el-collapse v-model="activeCollapseItems" class="filter-collapse">
+          <!-- 排序 -->
+          <el-collapse-item name="sort" class="filter-item">
+            <template #title>
+              <div class="collapse-title">
+                <el-icon class="title-icon"><Sort /></el-icon>
+                <span>排序</span>
+              </div>
+            </template>
+            <div class="filter-item-content">
+              <el-radio-group v-model="sortOrder" size="default" class="sort-radio-group">
+                <el-radio-button label="desc">时间降序</el-radio-button>
+                <el-radio-button label="asc">时间升序</el-radio-button>
+              </el-radio-group>
+            </div>
+          </el-collapse-item>
+          
+          <!-- 年份筛选 -->
+          <el-collapse-item name="year" class="filter-item">
+            <template #title>
+              <div class="collapse-title">
+                <el-icon class="title-icon"><Calendar /></el-icon>
+                <span>年份</span>
+              </div>
+            </template>
+            <div class="filter-item-content">
+              <el-button-group class="action-buttons">
+                <el-button size="small" @click="selectedYears = [...availableYears]">全选</el-button>
+                <el-button size="small" @click="selectedYears = []">全不选</el-button>
+              </el-button-group>
+              <el-checkbox-group v-model="selectedYears" size="default" class="checkbox-group-vertical">
+                <el-checkbox 
+                  v-for="year in availableYears"
+                  :key="year"
+                  :label="year"
+                  class="filter-checkbox">
+                  {{ year }}年<span class="count-badge">({{ getYearCount(year) }})</span>
+                </el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-collapse-item>
+          
+          <!-- 语言筛选 -->
+          <el-collapse-item name="language" class="filter-item">
+            <template #title>
+              <div class="collapse-title">
+                <el-icon class="title-icon"><ChatDotRound /></el-icon>
+                <span>语言</span>
+              </div>
+            </template>
+            <div class="filter-item-content">
+              <el-button-group class="action-buttons">
+                <el-button size="small" @click="selectedLanguages = [...availableLanguages]">全选</el-button>
+                <el-button size="small" @click="selectedLanguages = []">全不选</el-button>
+              </el-button-group>
+              <el-checkbox-group v-model="selectedLanguages" size="default" class="checkbox-group-vertical">
+                <el-checkbox 
+                  v-for="lang in availableLanguages" 
+                  :key="lang" 
+                  :label="lang"
+                  class="filter-checkbox">
+                  {{ lang }}<span class="count-badge">({{ getLanguageCount(lang) }})</span>
+                </el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-collapse-item>
+          
+          <!-- 类型筛选 -->
+          <el-collapse-item name="type" class="filter-item">
+            <template #title>
+              <div class="collapse-title">
+                <el-icon class="title-icon"><DocumentCopy /></el-icon>
+                <span>类型</span>
+              </div>
+            </template>
+            <div class="filter-item-content">
+              <el-button-group class="action-buttons">
+                <el-button size="small" @click="selectedTypes = [...availableTypes]">全选</el-button>
+                <el-button size="small" @click="selectedTypes = []">全不选</el-button>
+              </el-button-group>
+              <el-checkbox-group v-model="selectedTypes" size="default" class="checkbox-group-vertical">
+                <el-checkbox 
+                  v-for="type in availableTypes" 
+                  :key="type" 
+                  :label="type"
+                  class="filter-checkbox">
+                  {{ type }}<span class="count-badge">({{ getTypeCount(type) }})</span>
+                </el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-collapse-item>
+          
+          <!-- 来源筛选 -->
+          <el-collapse-item name="category" class="filter-item">
+            <template #title>
+              <div class="collapse-title">
+                <el-icon class="title-icon"><Collection /></el-icon>
+                <span>来源</span>
+              </div>
+            </template>
+            <div class="filter-item-content">
+              <el-button-group class="action-buttons">
+                <el-button size="small" @click="selectedCategories = [...availableCategories]">全选</el-button>
+                <el-button size="small" @click="selectedCategories = []">全不选</el-button>
+              </el-button-group>
+              <el-checkbox-group v-model="selectedCategories" size="default" class="checkbox-group-vertical">
+                <el-checkbox 
+                  v-for="cat in availableCategories" 
+                  :key="cat" 
+                  :label="cat"
+                  class="filter-checkbox">
+                  {{ cat }}<span class="count-badge">({{ getCategoryCount(cat) }})</span>
+                </el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+        
+        <div class="filter-actions">
+          <el-button 
+            type="default" 
+            size="default" 
+            @click="clearFilters" 
+            class="clear-button"
+            :icon="RefreshLeft">
+            清除筛选
+          </el-button>
+        </div>
+      </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { Document } from '@element-plus/icons-vue'
+import { 
+  Document, 
+  Filter, 
+  Sort, 
+  Calendar, 
+  ChatDotRound, 
+  DocumentCopy, 
+  Collection,
+  RefreshLeft
+} from '@element-plus/icons-vue'
 import PapersContent from '../PapersContent.vue'
 
 const sortOrder = ref('desc')
@@ -114,6 +191,8 @@ const availableTypes = ref([])
 const availableCategories = ref([])
 const filteredCount = ref(0)
 const loading = ref(true)
+const activeCollapseItems = ref(['sort']) // 默认只展开排序
+const allPapers = ref([]) // 存储所有论文数据用于计算数量
 
 const getBaseUrl = () => {
   const base = import.meta.env.BASE_URL || '/'
@@ -227,6 +306,38 @@ const handlePapersLoaded = (count) => {
   }
 }
 
+const handlePapersDataLoaded = (papers) => {
+  allPapers.value = papers
+}
+
+// 计算各筛选项的论文数量
+const getYearCount = (year) => {
+  return allPapers.value.filter(paper => String(paper.year) === year).length
+}
+
+const getLanguageCount = (language) => {
+  return allPapers.value.filter(paper => paper.language === language).length
+}
+
+const getTypeCount = (type) => {
+  return allPapers.value.filter(paper => paper.type === type).length
+}
+
+const getCategoryCount = (category) => {
+  return allPapers.value.filter(paper => {
+    let cats = []
+    if (!paper.categories || (Array.isArray(paper.categories) && paper.categories.length === 0)) {
+      cats = ['无']
+    } else if (Array.isArray(paper.categories)) {
+      cats = paper.categories.length > 0 ? paper.categories : ['无']
+    } else if (typeof paper.categories === 'string') {
+      cats = paper.categories.split(/[、,]/).map(c => c.trim()).filter(Boolean)
+      if (cats.length === 0) cats = ['无']
+    }
+    return cats.includes(category)
+  }).length
+}
+
 const clearFilters = () => {
   selectedYears.value = []
   selectedLanguages.value = []
@@ -251,25 +362,28 @@ onMounted(() => {
 .papers-page {
   width: 100%;
   max-width: 100%;
+  margin-left: -30px; // 整体往左靠
+  position: relative;
 
   .page-section {
+    width: 100%;
     background: rgba(255, 255, 255, 0.733);
     border: 1px solid rgb(227, 227, 227);
     margin-bottom: 25px;
     border-radius: 15px;
-    width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 
     .section-title {
       border-radius: 15px 15px 0 0;
       height: 70px;
       width: 100%;
-      background: rgba(242, 248, 255, 0.608);
+      background: linear-gradient(135deg, rgba(242, 248, 255, 0.8) 0%, rgba(235, 245, 255, 0.9) 100%);
       display: flex;
       align-items: center;
       position: relative;
       padding: 0;
+      border-bottom: 1px solid rgba(227, 227, 227, 0.5);
 
       .section-icon {
         width: 24px;
@@ -289,77 +403,278 @@ onMounted(() => {
       }
     }
 
-    .filter-toolbar {
+    .section-content {
       padding: 20px;
-      background: rgba(248, 249, 250, 0.8);
-      border-bottom: 1px solid rgb(227, 227, 227);
-      
-      .filter-group {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-        gap: 8px;
-        
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-        
-        .filter-label {
-          font-weight: 600;
-          color: #333;
-          font-size: 14px;
-          display: flex;
-          align-items: center;
-          margin-right: 0;
-          padding-top: 0;
-          white-space: nowrap;
-          .el-button-group {
-            margin-left: 6px;
-            display: flex;
-            align-items: center;
-          }
-        }
-        .el-checkbox-group {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          flex: 1 1 0;
-          min-width: 0;
-          gap: 6px;
-        }
-      }
-      
-      .filter-actions {
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid #e8e8e8;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        
-        .result-count {
-          color: #666;
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
+      line-height: 30px;
+      color: #666;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     
     .no-results {
       padding: 40px 20px;
       text-align: center;
     }
+  }
 
-    .section-content {
-      padding: 20px;
-      line-height: 30px;
-      color: #666;
+  .filter-sidebar {
+    width: 300px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid rgba(227, 227, 227, 0.8);
+    border-radius: 12px;
+    padding: 16px;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px); // 位于page-section右侧，添加20px间距
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .filter-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e8e8e8;
+
+      .filter-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .filter-icon {
+          font-size: 18px;
+          color: #409eff;
+        }
+
+        .filter-title {
+          font-weight: 600;
+          color: #333;
+          font-size: 18px;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      .result-count-badge {
+        background: linear-gradient(135deg, #409eff 0%, #66b1ff 100%);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        flex-shrink: 0;
+
+        .result-count {
+          font-size: 13px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .filter-collapse {
+      border: none;
+      background: transparent;
+
+      :deep(.el-collapse-item) {
+        background: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: #409eff;
+          box-shadow: 0 2px 8px rgba(64, 158, 255, 0.15);
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .el-collapse-item__header {
+          padding: 10px 14px;
+          font-weight: 500;
+          color: #333;
+          font-size: 14px;
+          border-bottom: none;
+          height: auto;
+          line-height: 1.5;
+          background: rgba(248, 249, 250, 0.6);
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: rgba(64, 158, 255, 0.08);
+            color: #409eff;
+          }
+
+          .collapse-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .title-icon {
+              font-size: 16px;
+              color: #409eff;
+            }
+
+            span {
+              font-weight: 500;
+            }
+          }
+        }
+
+        .el-collapse-item__content {
+          padding: 12px 14px;
+          background: #ffffff;
+        }
+
+        &.is-active {
+          border-color: #409eff;
+          box-shadow: 0 2px 12px rgba(64, 158, 255, 0.2);
+        }
+      }
+    }
+
+    .filter-item-content {
+      .action-buttons {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        gap: 6px;
+
+        .el-button {
+          flex: 1;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+
+      .checkbox-group-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .filter-checkbox {
+          padding: 6px 10px;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          margin: 0;
+
+          &:hover {
+            background: rgba(64, 158, 255, 0.06);
+          }
+
+          :deep(.el-checkbox__label) {
+            font-size: 13px;
+            color: #606266;
+            padding-left: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+
+          :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+            background-color: #409eff;
+            border-color: #409eff;
+          }
+
+          .count-badge {
+            color: #909399;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 2px;
+          }
+        }
+      }
+
+      .sort-radio-group {
+        width: 100%;
+        display: flex;
+
+        :deep(.el-radio-button) {
+          flex: 1;
+
+          .el-radio-button__inner {
+            width: 100%;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+
+    .filter-actions {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 2px solid #e8e8e8;
+
+      .clear-button {
+        width: 100%;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+        border: 1px solid #d3d4d6;
+
+        &:hover {
+          background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    // 自定义滚动条
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+  }
+
+  // 响应式设计
+  @media (max-width: 1024px) {
+    margin-left: 0;
+
+    .filter-sidebar {
       width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
+      position: relative;
+      top: 0;
+      left: auto;
+      max-height: none;
+      margin-top: 20px;
     }
   }
 }

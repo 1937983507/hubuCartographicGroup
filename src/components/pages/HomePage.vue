@@ -11,6 +11,20 @@
       </div>
     </div>
 
+    <!-- 团队成果 -->
+    <div class="page-section">
+      <div class="section-title">
+        <el-icon class="section-icon"><Trophy /></el-icon>
+        <span class="section-title-left">团队成果</span>
+        <span class="section-title-right" @click="goToTeamAchievements">
+          more >
+        </span>
+      </div>
+      <div class="section-content">
+        <TeamAchievementsPreview />
+      </div>
+    </div>
+
     <!-- 导师简介 -->
     <div class="page-section">
       <div class="section-title">
@@ -69,26 +83,13 @@
         <MarkdownContent file="honour-preview.md" />
       </div>
     </div>
-
-    <!-- 团队成果 -->
-    <div class="page-section">
-      <div class="section-title">
-        <el-icon class="section-icon"><Trophy /></el-icon>
-        <span class="section-title-left">团队成果</span>
-        <span class="section-title-right" @click="goToTeamAchievements">
-          more >
-        </span>
-      </div>
-      <div class="section-content">
-        <MarkdownContent file="team-achievements-preview.md" />
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { OfficeBuilding, User, FolderOpened, Document, Trophy, Medal } from '@element-plus/icons-vue'
 import MarkdownContent from '../MarkdownContent.vue'
+import TeamAchievementsPreview from './TeamAchievementsPreview.vue'
 
 const props = defineProps({
   showPage: {

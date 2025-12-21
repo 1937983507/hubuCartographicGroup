@@ -26,6 +26,7 @@ link: https://d.wanfangdata.com.cn/thesis/CiBUaGVzaXNOZXdTMjAyNTA2MTMyMDI1MDYxMz
 type: 硕士论文
 authors: 
   - 金钊
+  - 成晓强(导师)
 journal: 湖北大学
 categories: 
 year: 2024
@@ -42,6 +43,7 @@ link: https://d.wanfangdata.com.cn/thesis/CiBUaGVzaXNOZXdTMjAyNTA2MTMyMDI1MDYxMz
 type: 硕士论文
 authors: 
   - 刘娜
+  - 成晓强(导师)
 journal: 湖北大学
 categories: 
 year: 2024
@@ -112,6 +114,26 @@ date: 2021
 abstract: Modern technology has given thousands of amateur cartographers not only the opportunity but also the means to make a valuable contribution to mapping at all scales. However, web maps made by amateurs are prone to legibility shortcomings, such as coalescence, complexity, and congestion. These problems can be solved by map generalization; however, for amateurs participating in web mapping, the crucial decision is when to activate generalization. Such a decision is difficult, as the original and target map scales are sometimes uncertain owing to heterogeneous data quality and different output devices. In this study, starting from the identification of different pixels in a rasterized line, we developed a new scale-specific measure to evaluate the degree of legibility (DoL) of individual lines. Our experimental results showed that this measure could reflect the legibility of a line at a given map scale effectively, and could facilitate accurate decisions on whether generalization is necessary. In addition, we fitted a multi-scale legibility function (MSLF) for each line based on DoLs at multiple scales. This function can be used to estimate the legible scale for each line accurately. Our measures are easy to understand, tolerant of data quality, and have great potential for multi-scale spatial data processing.
 keywords: Legibility；legible scale；multi-scale legibility function；map generalization
 doi: 10.1080/15230406.2020.1857307
+language: 英文
+---
+
+---
+title: A Scientometric Visualization Analysis of Image Captioning Research From 2010 to 2020
+link: https://ieeexplore.ieee.org/document/9623457
+type: 期刊论文
+authors:
+  - W Liu
+  - H Wu
+  - K Hu
+  - X Cheng
+journal: IEEE Access
+categories: 
+year: 2021
+issue: 
+date: 2021
+abstract: Image captioning has gradually gained attention in the field of artificial intelligence and become an interesting and challenging task for image understanding. It needs to identify important objects in images, extract attributes, tell relationships, and help the machine generate human-like descriptions. Recent works in deep neural networks have greatly improved the performance of image caption models. However, machines are still unable to imitate the way humans think, talk and communicate, so image captioning remains an ongoing task. It is thus very important to keep up with the latest research and results in the field of image captioning whereas publications on this topic are numerous. Our work aims to help researchers to have a macro-level understanding of image captioning from four aspects: spatial-temporal distribution characteristics, collaborative networks, trends in subject research, and historical evolutionary path. We employ scientometric visualization methods to achieve this goal. The results show that China has published the largest amount of publications in image captioning, but the United States has the greatest impact on research in this area. Besides, thirteen academic groups are identified in the field of image description, with institutions such as Microsoft, Google, Australian National University, and Georgia Institute of Technology being the most prominent research institutions. Meanwhile, we find that evaluation methods, datasets, novel image captioning models based on generative adversarial networks, reinforcement learning, and Transformer, as well as remote sensing image captioning, are the new research trends. Lastly, we conclude that image captioning research has gone through three major development stages from 2010 to 2020, and on this basis, we propose a more comprehensive taxonomy of image captioning.
+keywords: Bibliometrics；Visualization；Indexes；Conferences；Remote sensing；Market research；Image recognition
+doi: 10.1109/ACCESS.2021.3129782
 language: 英文
 ---
 
@@ -244,7 +266,6 @@ title: 基于服务监测的WMS服务可用性调查及其影响因素探究
 link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI1MTExNzE2MDExNxIRZGx4eWd0eWoyMDE4MDIwMDIaCG5oamppdnp6
 type: 期刊论文
 authors: 
-  - 成晓强
   - 盛稳
   - 成晓强
   - 等
@@ -259,6 +280,27 @@ date: 2018.07.30
 abstract: 互联网上地图服务的数量一直在稳步增长,但其质量并没有显著提升,服务可用性偏低成为用户普遍诟病的问题.为了客观地探讨网络地图服务在可用性方面的问题,该文基于服务监测的方法对全球WMS服务的可用性进行调查和分析,并选取ArcGIS地图服务作为研究对照,揭示了WMS服务和ArcGIS服务在响应时间、出错情况、请求成功率以及接口功能等方面的现状和差异.实验表明:WMS的服务稳定性、响应时间和接口丰富性均不理想,无法有效支持用户与地图服务的可靠连接与稳定交互,而且与ArcGIS服务存在明显差距;商用云平台中驻存的地图服务具备显著的性能优势,表明硬件基础设施的改善是提升网络地图服务可用性的有效途径.该项研究有助于掌握网络地图服务的可用性现状,并为进一步的服务改善与优化提供科学依据.
 keywords: WMS服务 ArcGIS服务 服务监测 可用性 服务质量
 doi: 10.3969/j.issn.1672-0504.2018.02.002
+language: 中文
+---
+
+---
+title: 一种 WMS 领域主题文本提取及元数据扩展方法
+link: https://www.researchgate.net/publication/337413717_A_Text-based_WMS_Domain_Themes_Extraction_and_Metadata_Extension_Method_yizhong_WMS_lingyuzhutiwenbentiqujiyuanshujukuozhanfangfa
+type: 期刊论文
+authors: 
+  - 张敏
+  - 桂志鹏
+  - 成晓强
+  - 曹军
+  - 吴华意
+journal: 武汉大学学报
+categories: 
+year: 2019
+issue: 
+date: 2019
+abstract: 由于网络地图服务（Web map service，WMS）元数据缺乏显式的领域主题描述机制，用户很难准确、全面地发现目标领域的地图数据资源。提出了一种面向地理信息资源检索的WMS领域主题文本提取及元数据扩展方法。首先，设计了一种非监督文本分类算法，通过使用地球与环境术语集语义网（semantic Web of Earth and environmental terminology，SWEET）和大型英语词汇语义网WordNet，综合计算WMS元数据能力文档中地学术语、通识型词汇与领域主题的语义相关度，为WMS及其图层提取多标签主题。其次，基于ISO19115 2003地理信息元数据标准，为WMS元数据组织模型扩展领域主题。实验结果表明，所提出的WMS元数据主题分类算法取得了较高的查准率和查全率，且相较于朴素贝叶斯、线性支持向量机（support vector machine，SVM）和逻辑回归等方法整体上有较大的优势。该方法有望应用于当前的地理信息门户和目录服务，辅助用户快速、准确地定位目标领域的地图服务资源。
+keywords: 网络地图服务 文本分类 元数据标准 资源发现 语义距离 领域主题
+doi: 10.13203/j.whugis20180083
 language: 中文
 ---
 
@@ -310,6 +352,48 @@ language: 中文
 ---
 
 ---
+title: A Content-based WMS Layer Retrieval Method Combining Multiple Kernel Learning and User Feedback
+link: https://www.researchgate.net/publication/337414322_A_Content-based_WMS_Layer_Retrieval_Method_Combining_Multiple_Kernel_Learning_and_User_FeedbackduohexuexiheyonghufankuijiehedeWMStucengjiansuofangfa
+type: 期刊论文
+authors:
+  - Muxian Li
+  - Zhipeng Gui
+  - Xiaoqiang Cheng
+  - Huayi Wu
+  - Kun Qin
+journal: Acta Geodaetica et Cartographica Sinica
+categories: 
+year: 2019
+issue: 
+date: 2019
+abstract: To facilitate the discovery and use of geographic information, it is necessary to design an effective retrieval strategy to locate the map layers that customers want from massive WMS resources. Existing text-based WMS retrieval strategies are unable to solve the problems of metadata loss and inconsistency between pictures and metadata text, without considering map content. The visual similarity between maps is used to design a WMS layer retrieval method that combines multi-feature multiple kernel learning and user feedback to help users search for desired WMS layers. Color, shape and texture features are fused by multiple kernel learning to classify and rank layers according to similarity. A feedback mechanism is also established in the retrieval strategy, which is an effective guarantee that improves accuracy by collecting user-marked layers. Various kinds of WMS layers are selected to calculate the precision ration, analyze the time cost, and validate the retrieval feedback mechanism. The experimental results of selected WMS layers verified that the proposed algorithm is fast and highly precise. It can be integrated with existing text-based retrieval and discovery portals of geographic information.
+keywords: 
+doi: 10.11947/j.AGCS.2019.20180410
+language: 英文
+---
+
+---
+title: The Concept and Technologies of Quality of Geographic Information Service: Improving User Experience of GIServices in a Distributed Computing Environment
+link: https://www.mdpi.com/2220-9964/8/3/118
+type: 期刊论文
+authors:
+  - Kai Hu
+  - Zhipeng Gui
+  - Xiaoqiang Cheng
+  - Huayi Wu
+  - Stephen C.Mcclure
+journal: ISPRS International Journal of Geo-Information
+categories: 
+year: 2019
+issue: 
+date: 2019
+abstract: With the wide use of web technologies, service-oriented architecture (SOA), and cloud computing, more and more geographical information systems are served as GIServices. Under such circumstance, quality of geographic information services (QoGIS) has emerged as an important research topic of geoinformatics. However, it is not easy to understand the field since QoGIS has no formal standards, which is not only in regard to server-side performance and capabilities, but is also related with the quality of experience (QoE) during user interaction with GIServices. In this paper, we compare quality of service (QoS) and QoGIS research to understand the uniqueness of QoGIS. A conceptual framework is proposed to organize and interpret QoGIS research from the perspective of quality modeling, acquisition, and application, and we discuss the status, limitations, and future directions of this area. Overall, our analysis shows that new quality metrics will evolve from existing metrics to match the needs in concrete QoGIS applications, and user preferences need to be considered in quality modeling for GIServices. We discuss three approaches for the provision of QoGIS information and find that user feedback mining is an important supplementary source of quality information. Gaps between QoS and QoGIS research suggest that the GIService performance enhancement must not only consider the unique features of spatial data models and algorithms, but also system architecture, deployment, and user spatiotemporal access behaviors. Advanced service selection algorithms must be introduced to tackle the quality optimization problems of geoprocessing workflow planning. Moreover, a QoGIS-aware GIServices framework must be established to facilitate and ensure GISerivce discovery and interaction. We believe this bibliographic review provides a helpful guide for GIS researchers.
+keywords: QoS; quality of geographic information service (QoGIS); quality modeling; quality acquisition; quality application; quality metric
+doi: 10.3390/ijgi8030118
+language: 英文
+---
+
+---
 title: 一种WMS领域主题文本提取及元数据扩展方法
 link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI1MTExNzE2MDExNxITd2hjaGtqZHh4YjIwMTkxMTAxORoIanA0a2xtejU%3D
 type: 期刊论文
@@ -330,6 +414,51 @@ abstract: 由于网络地图服务(Web map service,WMS)元数据缺乏显式的�
 keywords: 网络地图服务 文本分类 元数据标准 资源发现 语义距离 领域主题
 doi: 10.13203/j.whugis20180083
 language: 中文
+---
+
+---
+title: The morphing of geographical features by Fourier transformation
+link: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0191136
+type: 期刊论文
+authors:
+  - Jingzhong Li
+  - Pengcheng Liu
+  - Wenhao Yu
+  - Xiaoqiang Cheng
+journal: PLoS ONE
+categories: 
+year: 2018
+issue: 
+date: 2018
+abstract: This paper presents a morphing model of vector geographical data based on Fourier transformation. This model involves three main steps. They are conversion from vector data to Fourier series, generation of intermediate function by combination of the two Fourier series concerning a large scale and a small scale, and reverse conversion from combination function to vector data. By mirror processing, the model can also be used for morphing of linear features. Experimental results show that this method is sensitive to scale variations and it can be used for vector map features’ continuous scale transformation. The efficiency of this model is linearly related to the point number of shape boundary and the interceptive value n of Fourier expansion. The effect of morphing by Fourier transformation is plausible and the efficiency of the algorithm is acceptable.
+keywords: FOURIER series；MATHEMATICAL functions；MORPHING (Computer animation)；GEOINFORMATICS；ENVIRONMENTAL sciences；LINEAR statistical models
+doi: 10.1371/journal.pone.0191136
+language: 英文
+---
+
+---
+title: Identifying the “Ghost City” of domain topics in a keyword semantic space combining citations
+link: https://link.springer.com/article/10.1007/s11192-017-2604-7
+type: 期刊论文
+authors:
+  - Kai Hu
+  - Kunlun Qi
+  - Siluo Yang
+  - Shengyu Shen
+  - Xiaoqiang Cheng
+  - Huayi Wu
+  - Jie Zheng
+  - Stephen McClure
+  - Tianxing Yu 
+journal: Scientometrics
+categories: 
+year: 2018
+issue: 
+date: 2018
+abstract: As an increasing number of scientific literature dataset are open access, more attention has gravitated to keyword analysis in many scientific fields. Traditional keyword analyses include the frequency based and the network based methods, both providing efficient mining techniques for identifying the representative keywords. The semantic meanings behind the keywords are important for understanding the research content. However, traditional keyword analysis methods pay scant attention to semantic meanings; the network based or frequency based methods as traditionally used, present limited semantic associations among the keywords. Moreover, the ways in which the semantic meanings behind the keywords are associated to the citations are not clear. Thus, we use the Google Word2Vec model to build word vectors and reduce them to a two-dimensional plane in a Voronoi diagram using the t-SNE algorithm, to link meanings with citations. The distance between semantic meanings of keywords in two-dimensional plane are similar to distances in geographical space, thus we introduce a geographic metaphor, “Ghost City” to describe the relationship between semantics and citations for hot topics that have recently become not so hot. Along with “Ghost City” zones, “Always Hot”, “Newly Emerging Hot”, and “Always Silent” areas are classified and mapped, describing the spatial heterogeneity and homogeneity of the semantic distribution of keywords cited in a domain database. Using a collection of “geographical natural hazard” literature datasets, we demonstrate that the proposed method and classification scheme can efficiently provide a unique viewpoint for interpreting the interaction between semantics and the citations, as “Ghost City”, “Always Hot”, “Newly Emerging Hot”, and “Always Silent” areas.
+keywords: Ghost City；Keyword analysis；Semantic space；Spatial analysis；Word2Vec；t-SNE
+doi: 10.1007/s11192-017-2604-7
+language: 英文
 ---
 
 ---
@@ -373,6 +502,25 @@ abstract: 缩略图可显著提高图片和视频等图形图像资源的展现�
 keywords: 网络地图服务 关键尺度 缩略图 信息量 相似度
 doi: 
 language: 中文
+---
+
+---
+title: An Algorithm Creating Thumbnail for Web Map Services Based on Information Entropy and Trans-scale Similarity
+link: https://www.semanticscholar.org/paper/An-Algorithm-Creating-Thumbnail-for-Web-Map-Based-Xiaoqiang-Min/9fddb19e4abac05841197ab0fcfd09422aa2ee58
+type: 期刊论文
+authors:
+  - Chen Xiaoqiang
+  - Yang Min
+  - Wu Huayi
+journal: Acta Geodaetica et Cartographica Sinica
+categories: 
+year: 2017
+issue: 
+date: 2017
+abstract: Thumbnail can greatly increase the efficiency of browsing pictures, videos and other image resources and improve the user experience prominently. Map service is a kind of graphic resource coupling spatial information and representation scale, its crafting, retrieval and management will not function well without the support of thumbnail. Sophisticated designed thumbnails bring users vivid first impressions and help users make efficient exploration. On the contrast, coarse thumbnail cause negative emotion and discourage users to explore the map service positively. Inspired by video summarization, key position and key scale of web map service were proposed. Meanwhile, corresponding quantitative measures and an automatic algorithm were drawn up and implemented. With the help of this algorithm, poor visual quality, lack of map information and low automation of current thumbnails was solved successfully. Information entropy was used to determine areas richer in content and tran-scale similarity was calculated to judge at which scale the appearance of the map service has changed drastically, and finally a series of static pictures were extracted which can represent the content of the map service. Experimental results show that this method produced medium-sized, content-rich and well-representative thumbnails which effectively reflect the content and appearance of map service.
+keywords: 
+doi: 10.11947/j.AGCS.2017.20170080
+language: 英文
 ---
 
 ---
@@ -436,6 +584,48 @@ language: 英文
 ---
 
 ---
+title: Global-Scale Resource Survey and Performance Monitoring of Public OGC Web Map Services
+link: https://www.mdpi.com/2220-9964/5/6/88
+type: 期刊论文
+authors:
+  - Z Gui
+  - J Cao
+  - X Liu
+  - X Cheng
+  - H Wu
+journal: ISPRS International Journal of Geo-Information
+categories: 
+year: 2016
+issue: 
+date: 2016
+abstract: One of the most widely-implemented service standards provided by the Open Geospatial Consortium (OGC) to the user community is the Web Map Service (WMS). WMS is widely employed globally, but there is limited knowledge of the global distribution, adoption status or the service quality of these online WMS resources. To fill this void, we investigated global WMSs resources and performed distributed performance monitoring of these services. This paper explicates a distributed monitoring framework that was used to monitor 46,296 WMSs continuously for over one year and a crawling method to discover these WMSs. We analyzed server locations, provider types, themes, the spatiotemporal coverage of map layers and the service versions for 41,703 valid WMSs. Furthermore, we appraised the stability and performance of basic operations for 1210 selected WMSs (i.e., GetCapabilities and GetMap). We discuss the major reasons for request errors and performance issues, as well as the relationship between service response times and the spatiotemporal distribution of client monitoring sites. This paper will help service providers, end users and developers of standards to grasp the status of global WMS resources, as well as to understand the adoption status of OGC standards. The conclusions drawn in this paper can benefit geospatial resource discovery, service performance evaluation and guide service performance improvements.
+keywords: 
+OGC Geospatial Consortium Inc.；CARTOGRAPHIC services
+doi: 10.3390/ijgi5060088
+language: 英文
+---
+
+---
+title: The analysis and measurement of building patterns using texton co-occurrence matrices
+link: https://www.tandfonline.com/doi/full/10.1080/13658816.2016.1265121
+type: 期刊论文
+authors:
+  - Wenhao Yu
+  - Tinghua Ai
+  - Pengcheng Liu
+  - Xiaoqiang Cheng
+journal: International Journal of Geographical Information Science
+categories: 
+year: 2016
+issue: 
+date: 2016
+abstract: The representation and analysis of building patterns are critical for characterizing urban scenes and making decisions in urban planning. The evaluation of building patterns is a difficult spatial analysis problem that exhibits properties of symbolization, homogeneity and regularity. Open issues in this field include the development of approaches for representing building patterns and vector-based methods for computing various pattern metrics. In the image analysis domain, there are many methods for pattern recognition (e.g., texture analysis), but there are few corresponding solutions for vector data. The aim of this research is to develop several building pattern metrics and offer a texton co-occurrence matrix (TCM)-based method to quantitatively evaluate the features of building patterns. The procedure first constructs a spatial field based on a Delaunay triangulation skeleton to partition a set of buildings into a set of tessellation cells. The tessellations of building clusters have a similar structure as image representations, in that each cell corresponds to an image pixel. We then use the texton analysis to establish a matrix to describe the tessellation structure, including the neighboring relationships and individual attribute information. Finally, a set of feature descriptors is obtained from the TCM to capture the texture-related information of building groups. Through experiments on building pattern analysis and spatial queries, we show that the results of TCM-based evaluation of building patterns are consistent with those of human cognition.
+keywords: Building pattern；spatial cognition；texture analysis；texton co-occurrence matrix；
+doi: 10.1080/13658816.2016.1265121
+language: 英文
+---
+
+---
 title: 自发地理信息兴趣点数据在线综合与多尺度可视化方法
 link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI1MTExNzE2MDExNxIOY2h4YjIwMTUwMjAwMTcaCG5oamppdnp6
 type: 期刊论文
@@ -481,7 +671,28 @@ language: 中文
 ---
 
 ---
-title: A CLOUD-BASED PLATFORM SUPPORTING GEOSPATIAL COLLABORATION FOR GIS EDUCATION: ISPRS Workshop of Commission VI 1-3, Advances in Web-based Education Services
+title: A Real-time Generalization and Multi-scale Visualization Method for POI Data in Volunteered Geographic Information
+link: https://www.semanticscholar.org/paper/A-Real-time-Generalization-and-Multi-scale-Method-Min-Tinghua/a9ef4fe872aa6c2c0da300eaee78b6a46578e0d7
+type: 期刊论文
+authors:
+  - M Yang
+  - AI Tinghua
+  - LU Wei
+  - X Cheng
+  - Q Zhou
+journal: Acta Geodaetica Et Cartographica Sinica
+categories: 
+year: 2015
+issue:
+date: 2015
+abstract: With the development of mobile and Web technologies,there has been an increasing number of mapbased mashups which display different kinds of POI data in volunteered geographic information.Due to the lack of suitable mechanisms for multi-scale visualization,the display of the POI data often results in the icon clustering problem with icons touching and overlapping each other.This paper introduces a multi-scale visualization method for urban facility POI data by combing the classic methods of generalization and on-line environment.Firstly,we organize the POI data into hierarchical structure by preprocessing in the server-side;the POI features then will be obtained based on the display scale in the client-side and the displacement operation will be executed to resolve the local icon conflicts.Experiments show that this approach can not only achieve the requirements of real-time online,but also can get better multi-scale representation of POI data.
+keywords: volunteered geographic information；urban facility POI data；multi-scale visualization；realtime generalization
+doi: 10.11947/j.AGCS.2015.20130564
+language: 英文
+---
+
+---
+title: A CLOUD-BASED PLATFORM SUPPORTING GEOSPATIAL COLLABORATION FOR GIS EDUCATION
 link: https://isprs-archives.copernicus.org/articles/XL-6-W1/1/2015/
 type: 会议论文
 authors:
@@ -493,9 +704,8 @@ journal: ISPRS Workshop of Commission VI 1-3, Advances in Web-based Education Se
 categories: 
 year: 2015
 issue:
-date: 2015, Berlin, Germany
-abstract: 
-GIS-related education needs support of geo-data and geospatial software. Although there are large amount of geographic information resources distributed on the web, the discovery, process and integration of these resources are still unsolved. Researchers and teachers always searched geo-data by common search engines but results were not satisfied. They also spent much money and energy on purchase and maintenance of various kinds of geospatial software. Aimed at these problems, a cloud-based geospatial collaboration platform called GeoSquare was designed and implemented. The platform serves as a geoportal encouraging geospatial data, information, and knowledge sharing through highly interactive and expressive graphic interfaces. Researchers and teachers can solve their problems effectively in this one-stop solution. Functions, specific design and implementation details are presented in this paper. Site of GeoSquare is: http://geosquare.tianditu.com/
+date: 2015
+abstract: GIS-related education needs support of geo-data and geospatial software. Although there are large amount of geographic information resources distributed on the web, the discovery, process and integration of these resources are still unsolved. Researchers and teachers always searched geo-data by common search engines but results were not satisfied. They also spent much money and energy on purchase and maintenance of various kinds of geospatial software. Aimed at these problems, a cloud-based geospatial collaboration platform called GeoSquare was designed and implemented. The platform serves as a geoportal encouraging geospatial data, information, and knowledge sharing through highly interactive and expressive graphic interfaces. Researchers and teachers can solve their problems effectively in this one-stop solution. Functions, specific design and implementation details are presented in this paper. Site of GeoSquare is: http://geosquare.tianditu.com/
 keywords: GEOGRAPHIC information systems；GEOSPATIAL data；CLOUD computing；COMPUTER software；COMPUTER graphics
 doi: 10.5194/isprsarchives-XL-6-W1-1-2015
 language: 英文
@@ -542,6 +752,24 @@ language: 中文
 ---
 
 ---
+title: 面向应需制图的地图综合服务
+link: https://kns.cnki.net/kcms2/article/abstract?v=lqoStndJ5wFqDgDSCgIlls8L7b2v-gFjsUmP5YbBveLUxgUvVdvQvj-TzE2DT13e7LIpFWSFcrEVcIlpYHFQvtc2SsuORpvq-T9-HkFtm_1SzeipzyhSfHo9VfJSux5DQOtrE2Xq7peEys2zPsrSrKhxJA77rtKhO7Z1J5_FDXs=&uniplatform=NZKPT&language=CHS
+type: 博士论文
+authors:
+  - 成晓强
+  - 艾廷华(导师)
+journal: 武汉大学
+categories:
+year: 2013
+issue: 
+date: 2013
+abstract: 地图制图的平民化、大众化乃大势所趋,其所依赖的技术条件已相当成熟,也涌现了诸多秉承该理念的Web制图平台,并逐渐催生了地图学一个新的研究方向：应需制图(On-demand Mapping),拓展了地图制图的泛在化。然而基于用户需求的个性化地图普遍存在主题不突出、图面要素冲突多、图面效果差和地图效用低等问题,其主要原因在于应需制图过程中缺乏专业性地图制图知识的指导。随着信息化服务的发展,应需制图已经成为一个实时、动态且无处不在的过程,专业制图者显然无法帮每个用户控制地图质量,但他们可以将自身的地图知识、经验和技能融于制图工具中,间接实现对用户主导地图的质量控制。本文以此为切入点,选择了地图制图中需要较高专业知识水平的地图综合为研究对象,研究向普通用户提供接口简单但功能专业地图综合工具的理论与方法。本文的主要研究贡献如下： 1)针对单机地图综合软件门槛高、普适性差、局限于专业用户且未考虑网络环境下应需制图特点与需求的缺陷,提出使用SaaS(Software As A Service)服务作为地图综合功能的软件形态,并进一步探讨了地图综合由单机环境变迁为网络环境所引发的变化,包括：无专业知识与制图经验的普通用户与专业用户并存,供给驱动的通用性综合让位于任务驱动的特定性综合,用户显式或隐式的需求取代比例尺成为地图综合的控制条件等。在此基础上归纳了Web环境下地图综合服务设计的五项原则：①接口和界面设计要隐藏专业的地图综合知识；②地图综合任务须与用户的需求偏好对应；③高度自动化的过程控制；④快速实时的操作响应；⑤即刻反馈的综合质量评价。 2)设计了面向应需制图的地图综合概念框架。该框架以用户需求为驱动,以云端的数据服务和功能服务为资源,通过核心引擎实现智能化的地图综合服务。该核心引擎有四种作用模式：封装以实现参量自适应调节、控制以实现算法的自适应运用、组合以实现算子的自适应决策和优化以实现地图综合知识的更新、修正。 3)根据应需模式下地图综合由用户需求主导的特点,提炼了一个由尺度控制和质量控制的多因子控制模型,尺度控制从正向驱动综合力度,质量控制则根据用户对形态特征、空间关系和分布模式等数据质量方面的侧重进行算子、算法和参量的决策。尺度控制模型的接口分为五种,包括参数控制、比例尺控制、综合粒度控制、地图符号控制和数据量控制,可实现四种形式的尺度导出方式：单一尺度点、系列尺度点、连续尺度区间和尺度相异区域。 4)借鉴语义网的思想总结了地图综合的算法的输入、输出、前置条件和后置条件,将地图综合服务的语义信息归纳为功能描述、适用条件、使用说明和性能要求四种语义描述信息,并基于此对OGC的WPS规范在地图综合中的应用进行了扩展,为地图综合服务的自动组合奠定了基础。引入了推荐系统和问答社区的思想以提升应需地图综合的用户体验。提出了两种推荐策略：基于知识和基于协同过滤的地图综合服务推荐,使服务能够自适应于用户的专业背景、制图任务及上下文环境。 5)实现了Web地图综合的原型系统,该B/S系统拥有适宜在线式处理可快速响应的图形综合算法,能够实现矢量地图点、线、面目标的化简、光滑、聚合、融合、降维、夸大、移位等操作,可精确控制综合程度实现综合操作效果的即时可视化并有对应的综合结果评价。 本研究将地图综合专业化的空间数据处理过程纳入到在线网络服务环境,拓展了通用地理信息服务的功能,为应需制图提供技术支持。以单机环境下的地图综合与网络环境下的在线式地图综合的差异为出发点,对经典的地图综合概念框架进行了扩展,引入了用户需求建模、地图综合算法语义描述、推荐系统等新思想,并使用SaaS服务来提供地图综合功能。地图综合SaaS服务既拥有云端部署、在线可用、按需服务和持续更新等,又向普通用户屏蔽了复杂的地图综合知识如综合约束、算法、参量等信息,并可提供图形用户界面(GUI)和应用程序接口(API)来满足不同层次的用户需求。实现的原型系统证明通过Web提供地图综合功能是可行的且具有较好的应用前景。 
+keywords: 地图综合 应需制图 Web服务 空间尺度变换 网络地图
+doi: 
+language: 中文
+---
+
+---
 title: A shape analysis and template matching of building features by the Fourier transform method
 link: https://www.sciencedirect.com/science/article/abs/pii/S019897151300063X
 type: 期刊论文
@@ -554,9 +782,28 @@ journal: Computers, Environment and Urban Systems
 categories:
 year: 2013
 issue: 
-date: 2013,41(0): 219-233
+date: 2013
 abstract: Shape cognition and representation play an important role in spatial analysis because shape contains some characteristics of geographic phenomena that can be mined to discover hidden geographic principles. As a difficult cognition problem, the shape representation problem in CIS field has the properties of abstraction, indetermination and symbolization. How to use a model to represent shape cognition in our mental world and how to use a single number to compute the shape measure are interesting questions. In the image processing domain, there are many shape measure methods, but there are few proposals for corresponding vector data. This study aims to build a polygon shape measure and offers a Fourier transform-based method to compute the degree of shape similarity. The procedure first represents the boundary of the vector polygon shape as a periodic function, which is expanded in a Fourier descriptor series, and then, it obtains a set of coefficients that capture the shape information. Through the experiment on spatial shape match and shape query, the study shows that Fourier transform-based shape identification and template matching is consistent with human cognition.
 keywords: Spatial cognition；Shape measure；Fourier transform；Shape matching
+doi: 
+language: 英文
+---
+
+---
+title: Adaptive Cartography in the Context of Neoge -ography and Ubiquitous Computing: Some Research Issues
+link: https://icaci.org/files/documents/ICC_proceedings/ICC2013/_extendedAbstract/270_proceeding.pdf
+type: 会议论文
+authors:
+  - Z Xiang
+  - T Ai
+  - X Cheng
+journal: International Cartographic Conference
+categories:
+year: 2013
+issue: 
+date: 2013
+abstract: Web 2.0 and ubiquitous computing together provide a promising technological framework for individuals to map the world and events that are happening around them and encourage free use of these maps where network connection is available. For example, once people publish information via the new social media such as Facebook, it is technically possible for their friends to get informed of this information very quickly. As much of such information contains geographic loca tions or information (e.g. place names) that can be georeferenced (in forms of POIs), maps provide a better interface to facilitate the information communication process. This envisions an environment for real-time geocollaboration (Chang & Li 2012), and everyone should be able to obtain knowledge as spatial relationships of events structure themselves on maps (e.g. it becomes easy to identify the nearest friend in one 's neighborhood).On the other hand, as handheld devices become smarter and more spatially capable (with built -in internet accessibility, GPS, compass, etc.), people with no geospatial expertise now are more easily than ever engaged in the using, sharing and distribution of spatial information (in the form of framework data). A famous example is OpenStreetMap (OSM), where everyone can collect and edit spatial data of their familiar places and contribute to the map worldwide. Goodchild (2007) described this phenomenon under the umbrella of citizen science and termed it volunteered geographic information (VGI) as a special case of the wider Web 2.0 practice of user generated content. This may substantially change the way how the general public and scientists from other domains use maps. With all the possibilities provided by this new context, however, the question is that are there problems from a cartographic perspective? Are there problems in how individuals make and use these maps? Are current cartographic theories sufficient (need for neo-cartography)? And all in all, what are the unique contributions that the cartographic domain can offer? Kraak (2011) expressed similar concerns and argued that there is no need for neo-cartography. However, he added further that one should make better use of current cartographic design knowledge to enable an ef fective visualization. This paper further identifies some of the basic problems of cartography in this new context. The issues concerned have a more cartographic and geospatial flavor. In doing so, we went through several case studies. The results are desc ribed in the following: (1) Heterogeneity between informal (e.g. OSM) and formal information sources. The heterogeneity lies in terms of semantics, fidelity and scale of spatial data to be integrated. How should diverse spatial data be integrated to benefit bo th sides? (2) Poor map design. Although there are many web services for map styling, the control over symbol design and color scheme is still limited. How can cartographic knowledge be better integrated into the tools? (3) Graphic information overload. This problem is now usually ignored by neogeographers. Cartographic generalization has long been dealing with such problems. How should existing approaches be adapted for the new context? (4) Adaptive visualization has always been an important area where various user groups and devices impose diverse map requirements. Apparently, it becomes even demanded in the context of ubiquitous mapping as user requirements and how people interact with maps cannot be determined statically. The question is therefore: how should we model the user and context in order to provide the right person with the right information in a timely and usable way?
+keywords: adaptive visualization；generalization；context - aware applications；customizable map content；map design；volunteered geographicin-formation
 doi: 
 language: 英文
 ---

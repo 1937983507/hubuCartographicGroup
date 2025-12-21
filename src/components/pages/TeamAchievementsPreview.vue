@@ -6,7 +6,7 @@
       <el-carousel
         :interval="5000"
         :arrow="cards.length > 1 ? 'hover' : 'never'"
-        height="650px"
+        :height="carouselHeight"
         indicator-position="outside"
         class="achievements-carousel"
       >
@@ -16,6 +16,8 @@
             :href="card.link || '#'"
             target="_blank"
             rel="noopener noreferrer"
+            @mouseenter="hoveredIndex = index"
+            @mouseleave="hoveredIndex = -1"
           >
             <div class="image-wrapper">
               <img 
@@ -23,10 +25,15 @@
                 :alt="card.title" 
                 loading="lazy" 
               />
-            </div>
-            <div class="content-wrapper">
-              <h3>{{ card.title }}</h3>
-              <p v-if="card.description">{{ card.description }}</p>
+              <div 
+                class="image-overlay"
+                :class="{ 'is-visible': hoveredIndex === index }"
+              >
+                <div class="overlay-content">
+                  <h3 class="overlay-title">{{ card.title }}</h3>
+                  <p class="overlay-description">{{ card.description }}</p>
+                </div>
+              </div>
             </div>
           </a>
         </el-carousel-item>
@@ -42,6 +49,8 @@ import { onMounted, ref } from 'vue'
 const cards = ref([])
 const loading = ref(true)
 const error = ref('')
+const hoveredIndex = ref(-1)
+const carouselHeight = ref('470px')
 
 const normalizeValue = line => line.split(':').slice(1).join(':').trim()
 
@@ -164,7 +173,7 @@ onMounted(loadContent)
 
   .el-carousel__container {
     width: 100% !important;
-    height: 480px !important;
+    height: 400px !important;
   }
 
   .el-carousel__item {
@@ -173,7 +182,7 @@ onMounted(loadContent)
     box-sizing: border-box;
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
+    align-items: flex-start !important;
 
     > a {
       width: 100%;
@@ -223,14 +232,12 @@ onMounted(loadContent)
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
   width: 100%;
   max-width: 800px;
-  // height: 100%;
   margin: 0 auto;
   border: none;
   border-radius: 0;
-  padding: 0px 20px;
+  padding: 0;
   background: transparent;
   text-decoration: none;
   color: inherit;
@@ -241,58 +248,120 @@ onMounted(loadContent)
     width: 100%;
     max-width: 750px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
 
     img {
       width: 100%;
       max-width: 750px;
-      max-height: 600px;
+      max-height: 580px;
       height: auto;
       object-fit: contain;
       border-radius: 8px;
       display: block;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 8px;
+      padding: 40px 30px;
+      box-sizing: border-box;
+
+      &.is-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .overlay-content {
+        text-align: center;
+        color: #fff;
+        max-width: 100%;
+        width: 100%;
+
+        .overlay-title {
+          font-size: 28px;
+          font-weight: 700;
+          margin: 0 0 20px 0;
+          line-height: 1.3;
+          color: #fff;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          transform: translateY(20px);
+          opacity: 0;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        .overlay-description {
+          font-size: 16px;
+          line-height: 1.8;
+          margin: 0;
+          color: rgba(255, 255, 255, 0.95);
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+          transform: translateY(20px);
+          opacity: 0;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+          white-space: pre-line;
+          max-height: 300px;
+          overflow-y: auto;
+          padding-right: 10px;
+
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+
+            &:hover {
+              background: rgba(255, 255, 255, 0.5);
+            }
+          }
+        }
+      }
+
+      &.is-visible {
+        .overlay-title,
+        .overlay-description {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
     }
   }
 
-  .content-wrapper {
-    width: 100%;
-    max-width: 750px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
-    flex-shrink: 0;
-
-    h3 {
-      font-size: 22px;
-      font-weight: 600;
-      color: #1f2f3d;
-      margin: 0;
-      line-height: 1.4;
-      transition: color 0.3s ease;
-    }
-
-    p {
-      font-size: 15px;
-      color: #5c6b7a;
-      line-height: 1.7;
-      margin: 0;
-      white-space: pre-line;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-align: center;
-    }
-  }
-
-  &:hover .content-wrapper h3 {
-    color: #409eff;
-  }
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -301,20 +370,25 @@ onMounted(loadContent)
       img {
         max-height: 300px;
       }
+
+      .image-overlay {
+        padding: 30px 20px;
+
+        .overlay-content {
+          .overlay-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+          }
+
+          .overlay-description {
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 200px;
+          }
+        }
+      }
     }
 
-    .content-wrapper {
-      h3 {
-        font-size: 18px;
-      }
-
-      p {
-        font-size: 14px;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        text-align: center;
-      }
-    }
   }
 }
 

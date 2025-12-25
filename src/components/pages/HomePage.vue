@@ -27,12 +27,16 @@
               <img class="achievement-img" :src="item.image" alt="" />
               <a v-if="item.link" class="mask-link" :href="item.link" target="_blank" rel="noopener">
                 <div class="achievement-mask">
-                  <div class="achievement-title">{{ item.title }}</div>
+                  <div class="achievement-title">
+                    {{ item.title }}<span v-if="item.author && item.author !== '待填写'" class="achievement-author"> - {{ item.author }}</span>
+                  </div>
                   <div class="achievement-desc">{{ item.desc }}</div>
                 </div>
               </a>
               <div v-else class="achievement-mask">
-                <div class="achievement-title">{{ item.title }}</div>
+                <div class="achievement-title">
+                  {{ item.title }}<span v-if="item.author && item.author !== '待填写'" class="achievement-author"> - {{ item.author }}</span>
+                </div>
                 <div class="achievement-desc">{{ item.desc }}</div>
               </div>
             </div>
@@ -113,12 +117,14 @@ function parseTeamAchievements(mdText, baseUrl = '/') {
   return sections.map(block => {
     const lines = block.split('\n');
     const title = lines[0].trim();
-    let image = '', link = '', desc = '';
+    let image = '', link = '', author = '', desc = '';
     for (let i = 1; i < lines.length; ++i) {
       if (lines[i].startsWith('image:')) {
         image = lines[i].replace('image:', '').trim();
       } else if (lines[i].startsWith('link:')) {
         link = lines[i].replace('link:', '').trim();
+      } else if (lines[i].startsWith('author:')) {
+        author = lines[i].replace('author:', '').trim();
       } else if (lines[i].trim()) {
         desc += lines[i].trim() + ' ';
       }
@@ -128,7 +134,7 @@ function parseTeamAchievements(mdText, baseUrl = '/') {
       image = image.replace(/^public\//, ''); // 剥离 public 前缀
       image = `${baseUrl}${image.startsWith('/') ? image.slice(1) : image}`;
     }
-    return { title, image, link, desc: desc.trim() };
+    return { title, image, link, author, desc: desc.trim() };
   });
 }
 
@@ -290,6 +296,11 @@ const goToTeamAchievements = () => {
       font-weight: 700;
       margin-bottom: 16px;
       text-shadow: 0 2px 8px rgba(0,0,0,0.22);
+      
+      .achievement-author {
+        font-size: 18px;
+        font-weight: 400;
+      }
     }
     .achievement-desc {
       font-size: 16px;

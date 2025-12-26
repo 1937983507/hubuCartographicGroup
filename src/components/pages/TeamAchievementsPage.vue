@@ -180,6 +180,82 @@ onMounted(loadContent)
   }
 }
 
+// 移动端响应式样式
+@media (max-width: 768px) {
+  .team-achievements-page {
+    // 确保页面容器在移动端没有高度限制
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+
+    .page-section {
+      margin-bottom: 15px;
+      border-radius: 10px;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+
+      .section-title {
+        height: 50px;
+        border-radius: 10px 10px 0 0;
+
+        .section-icon {
+          width: 20px;
+          height: 20px;
+          margin: 0 10px;
+          font-size: 20px;
+        }
+
+        .section-title-left {
+          line-height: 50px;
+          font-size: 18px;
+        }
+      }
+
+      .section-content {
+        padding: 15px;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+
+    .achievements-grid {
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    .achievement-card {
+      min-height: 280px;
+      height: auto !important;
+      max-height: none !important;
+      // 保持 overflow: hidden 以维持圆角效果，但确保高度自适应
+
+      .image-wrapper {
+        overflow: hidden; // 图片区域保持 hidden
+      }
+
+      .card-body {
+        padding: 12px;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+
+        h3 {
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 13px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+      }
+    }
+  }
+}
+
 .state-text {
   text-align: center;
   color: #888;

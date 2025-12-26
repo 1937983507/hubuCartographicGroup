@@ -1,5 +1,35 @@
 <template>
   <div class="papers-page">
+    <!-- 移动端遮罩层 -->
+    <div 
+      v-if="isMobile && sidebarVisible" 
+      class="sidebar-overlay"
+      @click="closeSidebar">
+    </div>
+    
+    <!-- 移动端浮动按钮 -->
+    <el-badge 
+      v-if="isMobile && activeFilterCount > 0" 
+      :value="activeFilterCount" 
+      :max="99"
+      class="filter-badge-wrapper">
+      <el-button
+        type="primary"
+        :icon="Filter"
+        circle
+        class="filter-toggle-button"
+        @click="toggleSidebar">
+      </el-button>
+    </el-badge>
+    <el-button
+      v-else-if="isMobile"
+      type="primary"
+      :icon="Filter"
+      circle
+      class="filter-toggle-button"
+      @click="toggleSidebar">
+    </el-button>
+    
     <!-- 左侧内容区域 -->
     <div class="page-section">
       <div class="section-title">
@@ -62,14 +92,25 @@
     </div>
     
     <!-- 右侧筛选工具栏 -->
-    <div class="filter-sidebar">
+    <div class="filter-sidebar" :class="{ 'sidebar-open': isMobile && sidebarVisible }">
         <div class="filter-header">
           <div class="filter-title-wrapper">
             <el-icon class="filter-icon"><Filter /></el-icon>
             <span class="filter-title">筛选条件</span>
           </div>
-          <div class="result-count-badge">
-            <span class="result-count">共 {{ filteredCount }} 篇</span>
+          <div class="filter-header-right">
+            <div class="result-count-badge">
+              <span class="result-count">共 {{ filteredCount }} 篇</span>
+            </div>
+            <!-- 移动端关闭按钮 -->
+            <el-button
+              v-if="isMobile"
+              text
+              :icon="Close"
+              circle
+              class="close-sidebar-button"
+              @click="closeSidebar">
+            </el-button>
           </div>
         </div>
         
@@ -206,7 +247,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { 
   Document, 
   Filter, 
@@ -216,7 +257,8 @@ import {
   DocumentCopy, 
   Collection,
   RefreshLeft,
-  Search
+  Search,
+  Close
 } from '@element-plus/icons-vue'
 import PapersContent from '../PapersContent.vue'
 
@@ -236,6 +278,55 @@ const activeCollapseItems = ref(['sort']) // 默认只展开排序
 const allPapers = ref([]) // 存储所有论文数据用于计算数量
 const searchKeyword = ref('') // 搜索关键词
 const searchType = ref('title') // 搜索类型：title(篇名)、keywords(关键词)、abstract(摘要)
+
+// 移动端侧边栏控制
+const isMobile = computed(() => {
+  if (typeof window === 'undefined') return false
+  return window.innerWidth <= 768
+})
+const sidebarVisible = ref(false)
+
+// 计算激活的筛选条件数量
+const activeFilterCount = computed(() => {
+  let count = 0
+  if (selectedYears.value.length > 0 && selectedYears.value.length < availableYears.value.length) count++
+  if (selectedLanguages.value.length > 0 && selectedLanguages.value.length < availableLanguages.value.length) count++
+  if (selectedTypes.value.length > 0 && selectedTypes.value.length < availableTypes.value.length) count++
+  if (selectedCategories.value.length > 0 && selectedCategories.value.length < availableCategories.value.length) count++
+  if (sortOrder.value !== 'desc') count++
+  return count
+})
+
+const toggleSidebar = () => {
+  sidebarVisible.value = !sidebarVisible.value
+}
+
+const closeSidebar = () => {
+  sidebarVisible.value = false
+}
+
+// 监听窗口大小变化
+const handleResize = () => {
+  if (!isMobile.value) {
+    sidebarVisible.value = false
+  }
+}
+
+onMounted(() => {
+  parsePapersForOptions()
+  // 自动全选所有复选框
+  setTimeout(() => {
+    selectedYears.value = [...availableYears.value]
+    selectedLanguages.value = [...availableLanguages.value]
+    selectedTypes.value = [...availableTypes.value]
+    selectedCategories.value = [...availableCategories.value]
+  }, 500) // 等待数据加载
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 
 const getBaseUrl = () => {
   const base = import.meta.env.BASE_URL || '/'
@@ -399,16 +490,6 @@ const clearSearch = () => {
   handleSearch()
 }
 
-onMounted(() => {
-  parsePapersForOptions()
-  // 自动全选所有复选框
-  setTimeout(() => {
-    selectedYears.value = [...availableYears.value]
-    selectedLanguages.value = [...availableLanguages.value]
-    selectedTypes.value = [...availableTypes.value]
-    selectedCategories.value = [...availableCategories.value]
-  }, 500) // 等待数据加载
-})
 </script>
 
 <style scoped lang="scss">
@@ -545,6 +626,12 @@ onMounted(() => {
         }
       }
 
+      .filter-header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       .result-count-badge {
         background: linear-gradient(135deg, #409eff 0%, #66b1ff 100%);
         color: white;
@@ -556,6 +643,15 @@ onMounted(() => {
         .result-count {
           font-size: 13px;
           font-weight: 500;
+        }
+      }
+
+      .close-sidebar-button {
+        color: #666;
+        font-size: 18px;
+        
+        &:hover {
+          color: #409eff;
         }
       }
     }
@@ -743,6 +839,38 @@ onMounted(() => {
     }
   }
 
+  // 移动端浮动按钮（仅在移动端显示）
+  .filter-toggle-button {
+    display: none; // 默认隐藏，在移动端媒体查询中显示
+  }
+
+  .filter-badge-wrapper {
+    display: none; // 默认隐藏，在移动端媒体查询中显示
+  }
+
+  // 移动端遮罩层（仅在移动端显示）
+  .sidebar-overlay {
+    display: none; // 默认隐藏，在移动端媒体查询中显示
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
   // 响应式设计
   @media (max-width: 1024px) {
     margin-left: 0;
@@ -753,7 +881,199 @@ onMounted(() => {
       top: 0;
       left: auto;
       max-height: none;
-      margin-top: 20px;
+      // margin-top: 20px;
+    }
+  }
+
+  // 移动端优化
+  @media (max-width: 768px) {
+    // 显示移动端浮动按钮
+    .filter-toggle-button,
+    .filter-badge-wrapper {
+      display: flex !important;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .filter-toggle-button {
+      width: 50px;
+      height: 50px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      font-size: 20px;
+
+      :deep(.el-icon) {
+        font-size: 20px;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .filter-badge-wrapper {
+      :deep(.el-badge__content) {
+        top: -4px;
+        right: -4px;
+      }
+    }
+
+    // 显示移动端遮罩层
+    .sidebar-overlay {
+      display: block !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page-section {
+      margin-bottom: 15px;
+      border-radius: 10px;
+
+      .section-title {
+        height: 50px;
+        border-radius: 10px 10px 0 0;
+
+        .section-icon {
+          width: 20px;
+          height: 20px;
+          margin: 0 10px;
+          font-size: 20px;
+        }
+
+        .section-title-left {
+          line-height: 50px;
+          font-size: 18px;
+        }
+      }
+
+      .search-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 15px;
+
+        .search-type-select {
+          width: 100%;
+        }
+
+        .search-input {
+          max-width: 100%;
+        }
+
+        .search-button,
+        .clear-search-button {
+          width: 100%;
+        }
+      }
+
+      .section-content {
+        padding: 15px;
+        line-height: 24px;
+        font-size: 14px;
+      }
+    }
+
+    .filter-sidebar {
+      position: fixed;
+      top: 70px; // 考虑 header 高度，避免被遮挡
+      left: 0;
+      width: 85%;
+      max-width: 320px;
+      height: calc(100vh - 70px); // 减去 header 高度
+      max-height: calc(100vh - 70px);
+      padding: 16px;
+      z-index: 999;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      border-radius: 0;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &.sidebar-open {
+        transform: translateX(0);
+        animation: slideIn 0.3s ease;
+      }
+
+      .filter-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+        margin-bottom: 14px;
+        padding: 12px 0;
+        padding-top: 0; // 移除顶部 padding，因为侧边栏已经有 top: 70px
+        border-bottom: 2px solid #e8e8e8;
+
+        .filter-title-wrapper {
+          .filter-title {
+            font-size: 16px;
+          }
+        }
+
+        .filter-header-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .result-count-badge {
+          padding: 4px 10px;
+
+          .result-count {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .filter-collapse {
+        :deep(.el-collapse-item__header) {
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+
+        :deep(.el-collapse-item__content) {
+          padding: 10px 12px;
+        }
+      }
+
+      .filter-item-content {
+        .action-buttons {
+          flex-direction: column;
+          gap: 8px;
+
+          .el-button {
+            width: 100%;
+          }
+        }
+
+        .checkbox-group-vertical {
+          .filter-checkbox {
+            padding: 8px 10px;
+
+            :deep(.el-checkbox__label) {
+              font-size: 12px;
+            }
+          }
+        }
+      }
     }
   }
 }

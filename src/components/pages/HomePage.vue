@@ -21,10 +21,23 @@
         </span>
       </div>
       <div class="section-content achievements-carousel-wrapper">
-        <el-carousel height="450px" trigger="hover" indicator-position="outside" v-if="teamAchievements.length">
+        <el-carousel :height="isMobile ? undefined : '450px'" :trigger="carouselTrigger" indicator-position="outside" v-if="teamAchievements.length" class="team-achievements-carousel">
           <el-carousel-item v-for="(item, idx) in teamAchievements" :key="idx">
             <div class="achievement-item">
-              <img class="achievement-img" :src="item.image" alt="" />
+              <!-- 桌面端图片 -->
+              <img class="achievement-img desktop-img" :src="item.image" :alt="item.title" />
+              <!-- 移动端图片区域 -->
+              <div class="achievement-image-wrapper">
+                <img class="achievement-img mobile-img" :src="item.image" :alt="item.title" />
+              </div>
+              <!-- 移动端显示的文字区域 -->
+              <div class="achievement-text">
+                <div class="achievement-title">
+                  {{ item.title }}<span v-if="item.author && item.author !== '待填写'" class="achievement-author"> - {{ item.author }}</span>
+                </div>
+                <div class="achievement-desc">{{ item.desc }}</div>
+              </div>
+              <!-- 桌面端遮罩 -->
               <a v-if="item.link" class="mask-link" :href="item.link" target="_blank" rel="noopener">
                 <div class="achievement-mask">
                   <div class="achievement-title">
@@ -107,7 +120,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { OfficeBuilding, User, FolderOpened, Document, Trophy, Medal } from '@element-plus/icons-vue'
 import MarkdownContent from '../MarkdownContent.vue'
 
@@ -139,6 +152,16 @@ function parseTeamAchievements(mdText, baseUrl = '/') {
 }
 
 const teamAchievements = ref([])
+
+// 响应式轮播图高度和触发方式
+const isMobile = computed(() => {
+  if (typeof window === 'undefined') return false
+  return window.innerWidth <= 768
+})
+
+const carouselTrigger = computed(() => {
+  return isMobile.value ? 'click' : 'hover'
+})
 
 function getBaseUrl() {
   const base = import.meta.env.BASE_URL || '/';
@@ -243,6 +266,8 @@ const goToTeamAchievements = () => {
     .achievements-carousel-wrapper {
       padding-top: 0;
       padding-bottom: 0;
+      height: auto;
+      overflow: visible;
     }
     .achievement-item {
       height: 450px;
@@ -253,7 +278,10 @@ const goToTeamAchievements = () => {
       justify-content: center;
       overflow: hidden;
     }
-    .achievement-img {
+    .achievement-image-wrapper {
+      display: none; // 桌面端不使用wrapper
+    }
+    .achievement-img.desktop-img {
       max-width: 100%;
       max-height: 100%;
       width: auto;
@@ -263,6 +291,9 @@ const goToTeamAchievements = () => {
       margin: 0 auto;
       border-radius: 15px;
       background: #f4f6fa;
+    }
+    .achievement-img.mobile-img {
+      display: none; // 桌面端隐藏移动端图片
     }
     .achievement-mask {
       transition: opacity 0.3s;
@@ -290,6 +321,10 @@ const goToTeamAchievements = () => {
     .achievement-item:hover .achievement-mask {
       opacity: 1;
       pointer-events: auto;
+    }
+    // 移动端：文字显示在图片下方
+    .achievement-text {
+      display: none; // 桌面端隐藏，使用遮罩
     }
     .achievement-title {
       font-size: 24px;
@@ -342,6 +377,7 @@ const goToTeamAchievements = () => {
       border-radius: 50%;
       transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s;
       transform: none !important;
+      opacity: 1 !important; // 默认显示
       
       .el-icon {
         font-size: 20px;
@@ -362,6 +398,249 @@ const goToTeamAchievements = () => {
     }
     .mask-link {
       display: contents;
+    }
+  }
+}
+
+// 移动端响应式样式
+@media (max-width: 768px) {
+  .home-page {
+    .page-section {
+      margin-bottom: 15px;
+      border-radius: 10px;
+
+      .section-title {
+        height: 50px;
+        border-radius: 10px 10px 0 0;
+
+        .section-icon {
+          width: 20px;
+          height: 20px;
+          margin: 0 10px;
+          font-size: 20px;
+        }
+
+        .section-title-left {
+          line-height: 50px;
+          font-size: 18px;
+        }
+
+        .section-title-right {
+          right: 15px;
+          font-size: 13px;
+          padding: 5px 0;
+        }
+      }
+
+      .section-content {
+        padding: 15px;
+        line-height: 24px;
+        font-size: 14px;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+
+    // 轮播图移动端优化：参考TeamAchievementsPage的卡片式布局
+    .achievements-carousel-wrapper {
+      overflow: hidden !important;
+      height: 360px !important;
+      max-height: 360px !important;
+      min-height: 360px !important;
+      padding-bottom: 0 !important;
+    }
+    
+    .achievement-item {
+      height: 360px !important;
+      min-height: 360px !important;
+      max-height: 360px !important;
+      flex-direction: column;
+      background: rgba(248, 251, 255, 0.75);
+      border: 1px solid rgba(227, 227, 227, 0.8);
+      border-radius: 14px;
+      overflow: hidden !important;
+      display: flex !important;
+      width: 100%;
+      align-items: stretch !important;
+      
+      // 移动端隐藏桌面端图片
+      .achievement-img.desktop-img {
+        display: none !important;
+      }
+      
+      // 移动端使用image-wrapper
+      .achievement-image-wrapper {
+        display: block !important;
+        width: 100%;
+        padding-top: 60%;
+        position: relative;
+        overflow: hidden;
+        background: #f4f6f8;
+        
+        .achievement-img.mobile-img {
+          display: block !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 0;
+          background: transparent;
+          margin: 0;
+        }
+      }
+      
+      // 移动端显示文字区域
+      .achievement-text {
+        display: flex !important;
+        flex-direction: column;
+        gap: 10px;
+        padding: 18px;
+        flex: 1;
+        width: 100%;
+        height: auto !important;
+        max-height: none !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        
+        .achievement-title {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 0;
+          color: #1f2f3d;
+          text-shadow: none;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          
+          .achievement-author {
+            font-size: 14px;
+            font-weight: 400;
+            color: #5c6b7a;
+          }
+        }
+        
+        .achievement-desc {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #5c6b7a;
+          text-shadow: none;
+          max-width: 100%;
+          margin: 0;
+          white-space: pre-line;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          height: auto !important;
+          max-height: none !important;
+        }
+      }
+      
+      // 移动端隐藏遮罩
+      .achievement-mask {
+        display: none;
+      }
+    }
+
+    // 移动端轮播图固定高度 - 与 App.vue 保持一致
+    .team-achievements-carousel {
+      height: 360px !important; 
+      max-height: 360px !important;
+      min-height: 360px !important;
+      
+      // 使用属性选择器覆盖内联样式
+      &[style*="height"],
+      &[style] {
+        height: 360px !important;
+        max-height: 360px !important;
+        min-height: 360px !important;
+      }
+      
+      :deep(.el-carousel__container) {
+        height: 360px !important;
+        min-height: 360px !important;
+        max-height: 360px !important;
+        overflow: hidden !important;
+      }
+      
+      // 使用属性选择器覆盖内联样式
+      :deep(.el-carousel__container[style*="height"]),
+      :deep(.el-carousel__container[style]) {
+        height: 360px !important;
+        min-height: 360px !important;
+        max-height: 360px !important;
+        overflow: hidden !important;
+      }
+      
+      :deep(.el-carousel__item) {
+        height: 360px !important;
+        min-height: 360px !important;
+        max-height: 360px !important;
+        display: flex !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+      }
+      
+      // 使用属性选择器覆盖内联样式
+      :deep(.el-carousel__item[style*="height"]),
+      :deep(.el-carousel__item[style]),
+      :deep(.el-carousel__item.is-active[style*="height"]),
+      :deep(.el-carousel__item.is-active[style]),
+      :deep(.el-carousel__item.is-animating[style*="height"]),
+      :deep(.el-carousel__item.is-animating[style]) {
+        height: 360px !important;
+        min-height: 360px !important;
+        max-height: 360px !important;
+        display: flex !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+      }
+      
+      // 确保轮播图内部的所有元素都能正常显示
+      :deep(.el-carousel__item > *) {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 100% !important;
+        overflow: hidden !important;
+      }
+      
+      // 移动端轮播按钮始终显示
+      :deep(.el-carousel__arrow) {
+        opacity: 1 !important;
+        display: flex !important;
+        width: 36px;
+        height: 36px;
+        
+        .el-icon {
+          font-size: 16px;
+        }
+      }
+    }
+
+    :deep(.el-carousel__indicators) {
+      margin-top: 15px;
+      
+      .el-carousel__indicator {
+        padding: 6px;
+        
+        .el-carousel__button {
+          width: 8px;
+          height: 8px;
+        }
+        
+        &.is-active .el-carousel__button {
+          width: 24px;
+        }
+      }
+    }
+
+    :deep(.el-carousel__arrow) {
+      width: 36px;
+      height: 36px;
+      
+      .el-icon {
+        font-size: 16px;
+      }
     }
   }
 }

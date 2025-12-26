@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef } from 'vue'
+import { ref, shallowRef, onMounted } from 'vue'
 import { ArrowUp } from '@element-plus/icons-vue'
 import MarkdownContent from '../components/MarkdownContent.vue'
 import HomePage from '../components/pages/HomePage.vue'
@@ -65,6 +65,7 @@ import SoftwritingPatentPage from '../components/pages/SoftwritingPatentPage.vue
 import HonourPage from '../components/pages/HonourPage.vue'
 import CooperationTeamPage from '../components/pages/CooperationTeamPage.vue'
 import StudentTeamPage from '../components/pages/StudentTeamPage.vue'
+import { recordPageVisit } from '@/utils/statistics'
 
 const currentPage = ref('home')
 const homeContainer = ref(null)
@@ -106,6 +107,15 @@ const scrollToTop = () => {
     behavior: 'smooth'
   })
 }
+
+// 页面加载时记录访问量
+onMounted(async () => {
+  try {
+    await recordPageVisit()
+  } catch (error) {
+    console.warn('记录页面访问失败:', error)
+  }
+})
 </script>
 
 <style scoped lang="scss">

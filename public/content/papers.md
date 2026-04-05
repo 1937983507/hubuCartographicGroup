@@ -1,4 +1,51 @@
 ---
+title: 基于距离-相似性隐喻的空间交互可视化
+link: https://xxx
+type: 期刊论文
+authors:
+  - 成晓强
+  - 赵家威
+  - 刘鹏程
+journal: 测绘学报
+categories: 
+  - CSTPCD
+  - 北大核心
+  - EI
+  - CSCD
+year: 2026
+issue: 
+date: 2026
+abstract: 
+doi: 
+language: 中文
+---
+
+---
+title: 一种面向地图综合建筑多边形化简的Transformer模型
+link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI2MDMwNjE2NTI1NxINY2h4YjIwMjYwMTAxMhoIcG1nZTJubzU%3D
+type: 期刊论文
+authors:
+  - 刘鹏程
+  - 成晓强
+  - 肖天元
+  - 杨敏
+  - 艾廷华
+journal: 测绘学报
+categories: 
+  - CSTPCD
+  - 北大核心
+  - EI
+  - CSCD
+year: 2026
+issue: 1期
+date: 2026.01-30
+abstract: 针对地图综合中建筑多边形化简方法依赖人工规则、自动化程度低且难以利用已有化简成果的问题,本文提出了一种基于Transformer机制的建筑多边形化简模型.该模型首先把建筑多边形映射至一定范围的网格空间,将建筑多边形的坐标串表达为网格序列,从而获取建筑多边形化简前后的Token序列,构建出建筑多边形化简样本对数据;随后采用Transformer架构建立模型,基于样本数据利用模型的掩码自注意力机制学习点序列之间的依赖关系,最终逐点生成新的简化多边形,从而实现建筑多边形的化简.在训练过程中,模型使用结构化的样本数据,设计了忽略特定索引的交叉熵损失函数以提升化简质量.试验设计包括主试验与泛化验证两部分.主试验基于洛杉矶1∶2000建筑数据集,分别采用0.2、0.3和0.5 mm 3种网格尺寸对多边形进行编码,实现了目标比例尺为1∶5000与1∶10000的化简.试验结果表明,在0.3 mm的网格尺寸下模型性能最优,验证集上的化简结果与人工标注的一致率超过92.0％,且针对北京部分区域的建筑多边形数据的泛化试验验证了模型的迁移能力;与LSTM模型的对比分析显示,在参数规模相近的条件下,LSTM模型无法形成有效收敛,并生成可用结果.本文证实了 Transformer在处理空间几何序列任务中的潜力,且能够有效复用已有化简样本,为智能建筑多边形化简提供了具有工程实用价值的途径.
+keywords: 地图综合 建筑多边形化简 Tokenization Transformer模型 上下文工程
+doi: 10.11947/j.AGCS.2026.20250262
+language: 中文
+---
+
+---
 title: 基于正负核密度曲线的线要素局部清晰度估算与自适应分段
 link: https://d.wanfangdata.com.cn/periodical/CiBQZXJpb2RpY2FsQ0hJU29scjkyMDI1MTExNzE2MDExNxINY2h4YjIwMjQwNjAxNhoIM2hlYmd4anQ%3D
 type: 期刊论文
@@ -185,6 +232,7 @@ categories:
   - 北大核心
   - CSTPCD
   - EI
+  - CSCD
 year: 2020
 issue: 2期
 date: 2020
@@ -495,6 +543,7 @@ categories:
   - 北大核心
   - CSTPCD
   - EI
+  - CSCD
 year: 2017
 issue: 1期
 date: 2017
@@ -640,6 +689,7 @@ categories:
   - 北大核心
   - CSTPCD
   - EI
+  - CSCD
 year: 2015
 issue: 2期
 date: 2015.03.23
@@ -822,6 +872,7 @@ categories:
   - 北大核心
   - CSTPCD
   - EI
+  - CSCD
 year: 2012
 issue: 1期
 date: 2012.04.28

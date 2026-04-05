@@ -60,5 +60,38 @@ import MarkdownContent from '../MarkdownContent.vue'
     }
   }
 }
+
+// 移动端响应式样式
+@media (max-width: 768px) {
+  .cooperation-team-page {
+    .page-section {
+      margin-bottom: 15px;
+      border-radius: 10px;
+
+      .section-title {
+        height: 50px;
+        border-radius: 10px 10px 0 0;
+
+        .section-icon {
+          width: 20px;
+          height: 20px;
+          margin: 0 10px;
+          font-size: 20px;
+        }
+
+        .section-title-left {
+          line-height: 50px;
+          font-size: 18px;
+        }
+      }
+
+      .section-content {
+        padding: 15px;
+        line-height: 24px;
+        font-size: 14px;
+      }
+    }
+  }
+}
 </style>
 

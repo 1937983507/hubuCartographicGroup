@@ -261,6 +261,7 @@ onMounted(async () => {
   .nav-menu {
     display: flex;
     flex: 1;
+    min-width: 0;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -268,9 +269,12 @@ onMounted(async () => {
     justify-content: center;
     flex-wrap: nowrap;
     overflow: hidden;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
 
     li {
-      padding: 0 14px;
+      flex-shrink: 0;
+      padding: 0 12px;
       line-height: 70px;
       cursor: pointer;
       transition: background 0.3s;
@@ -302,24 +306,24 @@ onMounted(async () => {
 }
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 20px;
   max-width: 1400px;
-  margin: 85px auto 20px;
-  margin-top: 110px; /* 为固定的header留出空间 */
-  gap: 20px;
+  margin: 110px auto 20px;
   padding: 0 5%;
   position: relative;
 }
 
 .container-left {
-  width: 300px;
-  flex-shrink: 0;
-  position: fixed;
-  left: max(5%, calc((100% - 1500px) / 2 + 5%));
-  top: 110px; /* 调整位置以适应固定的header */
+  width: 100%;
+  max-width: 300px;
+  position: sticky;
+  top: 110px;
   height: fit-content;
-  max-height: calc(100vh - 175px);
-  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+  min-width: 0;
 
   .profile-card {
     background: rgba(255, 255, 255, 0.733);
@@ -381,11 +385,10 @@ onMounted(async () => {
 }
 
 .container-right {
-  flex: 1;
+  min-width: 0;
   background: transparent;
-  padding: 0px 30px;
+  padding: 0 30px;
   position: relative;
-  margin-left: 270px; /* 为左侧固定栏留出空间 */
 }
 
 .back-top {
@@ -559,6 +562,7 @@ onMounted(async () => {
   }
 
   .container {
+    display: flex;
     flex-direction: column;
     margin-top: 70px;
     padding: 0 15px;
@@ -600,7 +604,7 @@ onMounted(async () => {
 
     .nav-menu {
       li {
-        padding: 0 10px;
+        padding: 0 8px;
 
         a {
           font-size: 16px;
@@ -610,16 +614,16 @@ onMounted(async () => {
   }
 
   .container {
+    grid-template-columns: 250px minmax(0, 1fr);
+    column-gap: 16px;
     padding: 0 3%;
   }
 
   .container-left {
-    width: 250px;
-    left: max(3%, calc((100% - 1200px) / 2 + 3%));
+    max-width: 250px;
   }
 
   .container-right {
-    margin-left: 220px;
     padding: 0 20px;
   }
 }

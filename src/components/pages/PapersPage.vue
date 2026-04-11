@@ -494,13 +494,17 @@ const clearSearch = () => {
 
 <style scoped lang="scss">
 .papers-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  align-items: start;
+  column-gap: 20px;
   width: 100%;
   max-width: 100%;
-  margin-left: -30px; // 整体往左靠
   position: relative;
 
   .page-section {
     width: 100%;
+    min-width: 0;
     background: rgba(255, 255, 255, 0.733);
     border: 1px solid rgb(227, 227, 227);
     margin-bottom: 25px;
@@ -579,19 +583,20 @@ const clearSearch = () => {
   }
 
   .filter-sidebar {
-    width: 300px;
+    width: 100%;
+    min-width: 0;
     background: rgba(255, 255, 255, 0.733);
     border: 1px solid rgb(227, 227, 227);
     border-radius: 12px;
     padding: 16px;
     height: fit-content;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px); // 位于page-section右侧，添加20px间距
+    position: sticky;
+    top: 110px;
+    align-self: start;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease;
     z-index: 10;
 
     &:hover {
@@ -873,6 +878,7 @@ const clearSearch = () => {
 
   // 响应式设计
   @media (max-width: 1024px) {
+    display: block;
     margin-left: 0;
 
     .filter-sidebar {
@@ -881,7 +887,7 @@ const clearSearch = () => {
       top: 0;
       left: auto;
       max-height: none;
-      // margin-top: 20px;
+      margin-top: 20px;
     }
   }
 

@@ -21,11 +21,23 @@
         </span>
       </div>
       <div class="section-content achievements-carousel-wrapper">
-        <el-carousel :height="isMobile ? undefined : '450px'" :trigger="carouselTrigger" indicator-position="outside" v-if="teamAchievements.length" class="team-achievements-carousel">
+        <el-carousel
+          ref="teamAchievementsCarouselRef"
+          :height="isMobile ? undefined : 'auto'"
+          :trigger="carouselTrigger"
+          indicator-position="outside"
+          v-if="teamAchievements.length"
+          class="team-achievements-carousel"
+        >
           <el-carousel-item v-for="(item, idx) in teamAchievements" :key="idx">
             <div class="achievement-item">
-              <!-- 桌面端图片 -->
-              <img class="achievement-img desktop-img" :src="item.image" :alt="item.title" />
+              <!-- 桌面端图片：按 intrinsic 比例占位，避免固定高度 + contain 产生上下大留白 -->
+              <img
+                class="achievement-img desktop-img"
+                :src="item.image"
+                :alt="item.title"
+                @load="onDesktopAchievementImgLoad"
+              />
               <!-- 移动端图片区域 -->
               <div class="achievement-image-wrapper">
                 <img class="achievement-img mobile-img" :src="item.image" :alt="item.title" />
@@ -120,7 +132,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, nextTick, unref } from 'vue'
 import { OfficeBuilding, User, FolderOpened, Document, Trophy, Medal } from '@element-plus/icons-vue'
 import MarkdownContent from '../MarkdownContent.vue'
 
@@ -152,6 +164,17 @@ function parseTeamAchievements(mdText, baseUrl = '/') {
 }
 
 const teamAchievements = ref([])
+const teamAchievementsCarouselRef = ref(null)
+
+/** height="auto" 时，图片异步加载后需让轮播重新测量当前项高度 */
+function onDesktopAchievementImgLoad() {
+  if (isMobile.value) return
+  nextTick(() => {
+    const c = teamAchievementsCarouselRef.value
+    if (!c) return
+    c.setActiveItem(unref(c.activeIndex))
+  })
+}
 
 // 响应式轮播图高度和触发方式
 const isMobile = computed(() => {
@@ -270,11 +293,11 @@ const goToTeamAchievements = () => {
       overflow: visible;
     }
     .achievement-item {
-      height: 450px;
       width: 100%;
+      min-height: 120px;
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       overflow: hidden;
     }
@@ -282,13 +305,13 @@ const goToTeamAchievements = () => {
       display: none; // 桌面端不使用wrapper
     }
     .achievement-img.desktop-img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: 100%;
-      object-fit: contain;
       display: block;
-      margin: 0 auto;
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: min(70vh, 560px);
+      object-fit: contain;
       border-radius: 15px;
       background: #f4f6fa;
     }
@@ -344,6 +367,12 @@ const goToTeamAchievements = () => {
       word-break: break-word;
       margin: 0 auto;
       max-width: 80%;
+    }
+    // 桌面端 height="auto"：子项不要用 100% 撑满固定高容器，否则宽图上下留白且测量不准
+    .team-achievements-carousel {
+      :deep(.el-carousel__item) {
+        height: auto;
+      }
     }
     // 轮播指示器样式优化
     :deep(.el-carousel__indicators) {
